@@ -3,6 +3,11 @@ import { Container } from 'react-bootstrap';
 import { AuthProvider } from '../contexts/AuthContexts';
 import Signup from './Signup';
 import axios from 'axios';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Dashboard from "./Dashboard"
+import Login from "./Login"
+import ForgotPassword from './ForgotPassword'
+import UpdateProfile from './UpdateProfile';
 
 // class App extends Component {
 //   state = {
@@ -35,15 +40,23 @@ import axios from 'axios';
 
 function App() {
   return (
-    <AuthProvider>
-      <Container
+    <Container
       className='d-flex align-items-center justify-content-center'
       style = {{ minHeight: '100vh' }}>
       <div className='w-100' style = {{ minWidth: '400px' }}>
-        <Signup></Signup>
+        <Router>
+          <AuthProvider>
+            <Routes>
+              <Route exact path="/" element={<Dashboard />} />
+              <Route path="/update-profile" element={<UpdateProfile />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+            </Routes>
+          </AuthProvider>
+        </Router>
       </div>
     </Container>
-    </AuthProvider>
   )
 }
 
