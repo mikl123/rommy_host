@@ -1,4 +1,3 @@
-import { logDOM } from "@testing-library/react";
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContexts";
@@ -18,9 +17,9 @@ export default function ForgotPassword() {
             setError('')
             setLoading(true)
             await resetPassword(emailRef.current.value)
-            setMessage('Check your inbox for further instructions')
+            setMessage('Заглянь на пошту за подальшими інструкціями')
         } catch {
-            setError('Failed to reset')
+            setError('Не вдалосяя відновити пароль')
         }
         setLoading(false)
     }
@@ -28,24 +27,24 @@ export default function ForgotPassword() {
     return(
         <>
         <Card>
-            <Card.Body>
-                <h2 className = 'text-center mb-4'>Password Reset</h2>
+            <Card.Body style={{backgroundColor: "#FAECE1"}}>
+                <h2 className = 'text-center mb-4' style={{color: "#542400", fontFamily: "unset"}}>Скинути пароль</h2>
                 {error && <Alert variant = 'danger'>{error}</Alert>}
                 {message && <Alert variant = 'success'>{message}</Alert>}
                 <Form onSubmit={handleSubmit}>
                     <Form.Group id = 'email'>
-                        <Form.Label>Email</Form.Label>
+                        <Form.Label style={{color: "#542400", fontFamily: "Forum"}}>Корпоративна пошта</Form.Label>
                         <Form.Control type = 'email' ref = {emailRef} required></Form.Control>
                     </Form.Group>
-                    <Button disabled = {loading} className = 'w-100' type = 'submit'>Reset Password</Button>
+                    <Button disabled = {loading} className = 'w-100' type = 'submit' style={{backgroundColor: "#542400", border: "#542400", marginTop: "35px", height: "65px", fontFamily: "Forum", fontSize: "20px"}}>Скинути пароль</Button>
                 </Form>
                 <div className = 'w-100 text-center mt-3'>
-                    <Link to="/login">Log In</Link>
+                    <Link to="/login" style={{color: "#542400", fontFamily: "Forum"}}>Увійти</Link>
                 </div>
             </Card.Body>
         </Card>
-        <div className = 'w-100 text-center mt-2'>
-            Need an account? <Link to="/signup">Sign Up</Link>
+        <div className = 'w-100 text-center mt-2' style={{color: "#542400", fontFamily: "Forum"}}>
+             Не зареєстрований? <Link to="/signup" style={{color: "#542400", fontFamily: "Forum"}}>Зареєструватися</Link>
         </div>
         </>
     )

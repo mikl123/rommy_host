@@ -1,4 +1,3 @@
-import { logDOM } from "@testing-library/react";
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContexts";
