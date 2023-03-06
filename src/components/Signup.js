@@ -5,6 +5,7 @@ import { useAuth } from "../contexts/AuthContexts";
 import { Link, useNavigate } from "react-router-dom"
 
 export default function Signup() {
+    const authRef = useRef()
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
@@ -17,7 +18,7 @@ export default function Signup() {
         e.preventDefault()
 
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-            return setError('Passwords do not match')
+            return setError('Паролі не збігаються')
         }
 
         try {
@@ -26,36 +27,39 @@ export default function Signup() {
             await signup(emailRef.current.value, passwordRef.current.value)
             navigate("/")
         } catch {
-            setError('Failed to create an account')
+            setError('Не вдалося створити профіль')
         }
         setLoading(false)
     }
-
     return(
         <>
         <Card>
-            <Card.Body>
-                <h2 className = 'text-center mb-4'>Sign Up</h2>
+            <Card.Body style={{backgroundColor: "#FAECE1"}}>
+                <h2 className = 'text-center mb-4' style={{color: "#542400", fontFamily: "unset"}}>Зареєструватися</h2>
                 {error && <Alert variant = 'danger'>{error}</Alert>}
-                <Form onSubmit={handleSubmit}>
+                <Form style={{height: "400px"}} onSubmit={handleSubmit}>
+                    <Form.Group id = 'name'>
+                        <Form.Label style={{color: "#542400", fontFamily: "Forum"}}>Ім'я та прізвище</Form.Label>
+                        <Form.Control type = 'text' ref = {authRef} required></Form.Control>
+                    </Form.Group>
                     <Form.Group id = 'email'>
-                        <Form.Label>Email</Form.Label>
+                        <Form.Label style={{color: "#542400", fontFamily: "Forum"}}>Корпоративна пошта</Form.Label>
                         <Form.Control type = 'email' ref = {emailRef} required></Form.Control>
                     </Form.Group>
                     <Form.Group id = 'password'>
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label style={{color: "#542400", fontFamily: "Forum"}}>Пароль</Form.Label>
                         <Form.Control type = 'password' ref = {passwordRef} required></Form.Control>
                     </Form.Group>
                     <Form.Group id = 'password-confirm'>
-                        <Form.Label>Password Confirmation</Form.Label>
+                        <Form.Label style={{color: "#542400", fontFamily: "Forum"}}>Підтвердження паролю</Form.Label>
                         <Form.Control type = 'password' ref = {passwordConfirmRef} required></Form.Control>
                     </Form.Group>
-                    <Button disabled = {loading} className = 'w-100' type = 'submit'>Sign Up</Button>
+                    <Button disabled = {loading} className = 'w-100' type = 'submit' style={{backgroundColor: "#542400", border: "#542400", marginTop: "35px", height: "65px", fontFamily: "Forum", fontSize: "20px"}}>Зареєструватися</Button>
                 </Form>
             </Card.Body>
         </Card>
-        <div className = 'w-100 text-center mt-2'>
-            Already have an account? <Link to="/login">Log In</Link>
+        <div className = 'w-100 text-center mt-2' style={{color: "#542400", fontFamily: "Forum"}}>
+            Зареєстрований? <Link style={{color: "#542400", fontFamily: "Forum"}} to="/login">Увійти</Link>
         </div>
         </>
     )

@@ -20,7 +20,7 @@ export default function Login() {
             await login(emailRef.current.value, passwordRef.current.value)
             navigate("/")
         } catch {
-            setError('Failed to log in')
+            setError('Не вдалося увійти')
         }
         setLoading(false)
     }
@@ -28,27 +28,27 @@ export default function Login() {
     return(
         <>
         <Card>
-            <Card.Body>
-                <h2 className = 'text-center mb-4'>Log In</h2>
+            <Card.Body style={{backgroundColor: "#FAECE1"}}>
+                <h2 className = 'text-center mb-4' style={{color: "#542400", fontFamily: "unset"}}><strong>Увійти</strong></h2>
                 {error && <Alert variant = 'danger'>{error}</Alert>}
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={handleSubmit} style={{height: "250px"}}>
                     <Form.Group id = 'email'>
-                        <Form.Label>Email</Form.Label>
+                        <Form.Label style={{color: "#542400", fontFamily: "Forum"}}>Корпоративна пошта</Form.Label>
                         <Form.Control type = 'email' ref = {emailRef} required></Form.Control>
                     </Form.Group>
                     <Form.Group id = 'password'>
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label style={{color: "#542400", fontFamily: "Forum"}}>Пароль</Form.Label>
                         <Form.Control type = 'password' ref = {passwordRef} required></Form.Control>
                     </Form.Group>
-                    <Button disabled = {loading} className = 'w-100' type = 'submit'>Log In</Button>
+                    <Button disabled = {loading} className = 'w-100' type = 'submit' style={{backgroundColor: "#542400", border: "#542400", marginTop: "35px", height: "65px", fontFamily: "Forum", fontSize: "20px"}}>Увійти</Button>
                 </Form>
                 <div className = 'w-100 text-center mt-3'>
-                    <Link to="/forgot-password">Forgot Password?</Link>
+                    <Link style={{color: "#542400", fontFamily: "Forum"}} to="/forgot-password">Забув пароль?</Link>
                 </div>
             </Card.Body>
         </Card>
-        <div className = 'w-100 text-center mt-2'>
-            Need an account? <Link to="/signup">Sign Up</Link>
+        <div className = 'w-100 text-center mt-2' style={{color: "#542400", fontFamily: "Forum"}} >
+            Не зареєстрований? <Link style={{color: "#542400", fontFamily: "Forum"}} to="/signup">Зареєструватися</Link>
         </div>
         </>
     )

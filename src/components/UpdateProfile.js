@@ -17,7 +17,7 @@ export default function UpdateProfile() {
         e.preventDefault()
 
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-            return setError('Passwords do not match')
+            return setError('Паролі не збігаються')
         }
 
         const promises = []
@@ -33,7 +33,7 @@ export default function UpdateProfile() {
         Promise.all(promises).then(() => {
             navigate('/')
         }).catch(() => {
-            setError("Failed to update accout")
+            setError("Не вдалося редагувати профіль")
         }).finally(() => {
             setLoading(false)
         })
@@ -42,28 +42,28 @@ export default function UpdateProfile() {
     return(
         <>
         <Card>
-            <Card.Body>
-                <h2 className = 'text-center mb-4'>Update Profile</h2>
+            <Card.Body style={{color: "#542400", backgroundColor: "#FAECE1"}}>
+                <h2 className = 'text-center mb-4' style={{color: "#542400", fontFamily: "unset"}}><strong>Редагувати профіль</strong></h2>
                 {error && <Alert variant = 'danger'>{error}</Alert>}
                 <Form onSubmit={handleSubmit}>
                     <Form.Group id = 'email'>
-                        <Form.Label>Email</Form.Label>
+                        <Form.Label style={{color: "#542400", fontFamily: "Forum"}}>Корпоративна пошта</Form.Label>
                         <Form.Control type = 'email' ref = {emailRef} required defaultValue={currentUser.email}></Form.Control>
                     </Form.Group>
                     <Form.Group id = 'password'>
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type = 'password' ref = {passwordRef} placeholder="Leave blank to keep the same"></Form.Control>
+                        <Form.Label style={{color: "#542400", fontFamily: "Forum"}}>Пароль</Form.Label>
+                        <Form.Control type = 'password' ref = {passwordRef}></Form.Control>
                     </Form.Group>
                     <Form.Group id = 'password-confirm'>
-                        <Form.Label>Password Confirmation</Form.Label>
-                        <Form.Control type = 'password' ref = {passwordConfirmRef} required placeholder="Leave blank to keep the same"></Form.Control>
+                        <Form.Label style={{color: "#542400", fontFamily: "Forum"}}>Підтвердження паролю</Form.Label>
+                        <Form.Control type = 'password' ref = {passwordConfirmRef} required></Form.Control>
                     </Form.Group>
-                    <Button disabled = {loading} className = 'w-100' type = 'submit'>Update</Button>
+                    <Button disabled = {loading} className = 'w-100' type = 'submit' style={{backgroundColor: "#542400", border: "#542400", marginTop: "20px", height: "65px", fontFamily: "Forum", fontSize: "20px"}}>Редагувати</Button>
                 </Form>
             </Card.Body>
         </Card>
         <div className = 'w-100 text-center mt-2'>
-            <Link to="/">Cancel</Link>
+            <Link style={{color: "#542400", fontFamily: "Forum"}} to="/">Скасувати</Link>
         </div>
         </>
     )
