@@ -5,6 +5,14 @@ import { useAuth } from "../contexts/AuthContexts";
 import { Link, useNavigate } from "react-router-dom"
 
 export default function Login() {
+    const [isHover, setIsHover] = useState(false)
+    const handleMouseEnter = () => {
+        setIsHover(true);
+    };
+  
+    const handleMouseLeave = () => {
+        setIsHover(false);
+    };
     const emailRef = useRef()
     const passwordRef = useRef()
     const { login } = useAuth()
@@ -40,7 +48,11 @@ export default function Login() {
                         <Form.Label style={{color: "#542400", fontFamily: "Forum"}}>Пароль</Form.Label>
                         <Form.Control type = 'password' ref = {passwordRef} required></Form.Control>
                     </Form.Group>
-                    <Button disabled = {loading} className = 'w-100' type = 'submit' style={{backgroundColor: "#542400", border: "#542400", marginTop: "35px", height: "65px", fontFamily: "Forum", fontSize: "20px"}}>Увійти</Button>
+                    <Button disabled = {loading} className = 'w-100' type = 'submit' style={{backgroundColor: "#542400", border: "#542400", marginTop: "35px", height: "65px", fontFamily: "Forum", fontSize: "20px", backgroundColor: isHover ? '#896347' : 'rgb(84, 36, 0)', color: isHover ? 'white' : 'white', padding: '15px'}}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}>
+                        Увійти
+                    </Button>
                 </Form>
                 <div className = 'w-100 text-center mt-3'>
                     <Link style={{color: "#542400", fontFamily: "Forum"}} to="/forgot-password">Забув пароль?</Link>

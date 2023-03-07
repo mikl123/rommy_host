@@ -4,6 +4,14 @@ import { useAuth } from "../contexts/AuthContexts";
 import { Link, useNavigate } from "react-router-dom"
 
 export default function UpdateProfile() {
+    const [isHover, setIsHover] = useState(false)
+    const handleMouseEnter = () => {
+        setIsHover(true);
+    };
+  
+    const handleMouseLeave = () => {
+        setIsHover(false);
+    };
     const emailRef = useRef()
     const passwordRef = useRef()
     const passwordConfirmRef = useRef()
@@ -57,7 +65,11 @@ export default function UpdateProfile() {
                         <Form.Label style={{color: "#542400", fontFamily: "Forum"}}>Підтвердження паролю</Form.Label>
                         <Form.Control type = 'password' ref = {passwordConfirmRef} required></Form.Control>
                     </Form.Group>
-                    <Button disabled = {loading} className = 'w-100' type = 'submit' style={{backgroundColor: "#542400", border: "#542400", marginTop: "20px", height: "65px", fontFamily: "Forum", fontSize: "20px"}}>Редагувати</Button>
+                    <Button disabled = {loading} className = 'w-100' type = 'submit' style={{backgroundColor: "#542400", border: "#542400", marginTop: "20px", height: "65px", fontFamily: "Forum", fontSize: "20px",  backgroundColor: isHover ? '#896347' : 'rgb(84, 36, 0)', color: isHover ? 'white' : 'white', padding: '15px'}}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}>
+                        Редагувати
+                    </Button>
                 </Form>
             </Card.Body>
         </Card>

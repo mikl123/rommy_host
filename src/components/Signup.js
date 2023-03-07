@@ -5,6 +5,14 @@ import { useAuth } from "../contexts/AuthContexts";
 import { Link, useNavigate } from "react-router-dom"
 
 export default function Signup() {
+    const [isHover, setIsHover] = useState(false)
+    const handleMouseEnter = () => {
+        setIsHover(true);
+    };
+  
+    const handleMouseLeave = () => {
+        setIsHover(false);
+    };
     const authRef = useRef()
     const emailRef = useRef()
     const passwordRef = useRef()
@@ -54,7 +62,12 @@ export default function Signup() {
                         <Form.Label style={{color: "#542400", fontFamily: "Forum"}}>Підтвердження паролю</Form.Label>
                         <Form.Control type = 'password' ref = {passwordConfirmRef} required></Form.Control>
                     </Form.Group>
-                    <Button disabled = {loading} className = 'w-100' type = 'submit' style={{backgroundColor: "#542400", border: "#542400", marginTop: "35px", height: "65px", fontFamily: "Forum", fontSize: "20px"}}>Зареєструватися</Button>
+                    <Button disabled = {loading} className = 'w-100' type = 'submit' 
+                    style={{backgroundColor: "#542400", border: "#542400", marginTop: "35px", height: "65px", fontFamily: "Forum", fontSize: "20px", backgroundColor: isHover ? '#896347' : 'rgb(84, 36, 0)', color: isHover ? 'white' : 'white', padding: '15px'}}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}>
+                        <p>Зареєструватися</p>
+                    </Button>
                 </Form>
             </Card.Body>
         </Card>
