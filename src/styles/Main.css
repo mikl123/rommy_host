@@ -26,7 +26,7 @@ body > .container {
     align-self: center;
     width: 100%;
     align-items: center;
-    height: 500px;
+    height: 630px;
     background-color: #FAECE1;
 }
 .button_group{
@@ -151,34 +151,45 @@ img {
     font-family: Forum;
     text-align: left;
 }
-/* Style all font awesome icons */
+
 .fa {
-    padding: 5px;
-    font-size: 1000px;
-    height: 50px;
-    width: 50px;
-    text-align: center;
+    padding: 20px;
+    font-size: 50px;
+    width: 30px;
     text-decoration: none;
     border-radius: 50%;
-    margin: 10px;
 }
   
-  /* Add a hover effect if you want */
 .fa:hover {
     color: #542400;
     opacity: 0.7;
 }
   
-  /* Set a specific color for each brand */
-  
-  /* Facebook */
 .fa-instagram {
+    margin-left: 50px;
+    padding: 8px;
     background: #ffffff;
-    color: rgb(0, 0, 0);
+    color: #542400;
 }
   
-  /* Twitter */
 .fa-youtube {
+    margin-left: 20px;
+    padding: 8px;
     background: #ffffff;
-    color: rgb(0, 0, 0);
+    color: #542400;
+}
+
+.fa-dribbble {
+    margin-left: 20px;
+    padding: 8px;
+    background: #ffffff;
+    color: #542400;
+}
+.greeting{
+    margin-top: 50px;
+    background-color: #c8b8ad;
+    color: #542400;
+    font-size: 250%;
+    padding: 50px 10px 20px 7px;
+    text-align: center;
 }
