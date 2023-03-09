@@ -1,10 +1,14 @@
 import { logDOM } from "@testing-library/react";
 import React, { useRef, useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap"
+import { Form, Button, Card, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContexts";
 import { Link, useNavigate } from "react-router-dom"
 
 export default function Signup() {
+    let navigate1 = useNavigate(); 
+    const routeChange = (path) =>{ 
+      navigate1(path);
+    }
     const [isHover, setIsHover] = useState(false)
     const handleMouseEnter = () => {
         setIsHover(true);
@@ -40,7 +44,17 @@ export default function Signup() {
         setLoading(false)
     }
     return(
-        <>
+        <div>
+            <div className="header">
+                <div className="logo">RooMy</div>
+                <div className="button_group">
+                    <button onClick={()=>routeChange("/")} className="header_button-login">Головна</button>
+                </div>
+            </div>
+            <div className="image">
+                {/* <img src={logo}></img> */}
+            </div>
+        <Container className='align-items-center justify-content-center' style = {{justifyContent: "center",  minHeight: '100vh', maxWidth: '400px', marginTop:"80px"}}>
         <Card>
             <Card.Body style={{backgroundColor: "#FAECE1"}}>
                 <h2 className = 'text-center mb-4' style={{color: "#542400", fontFamily: "unset"}}>Зареєструватися</h2>
@@ -74,6 +88,7 @@ export default function Signup() {
         <div className = 'w-100 text-center mt-2' style={{color: "#542400", fontFamily: "Forum"}}>
             Зареєстрований? <Link style={{color: "#542400", fontFamily: "Forum"}} to="/login">Увійти</Link>
         </div>
-        </>
+        </Container>
+        </div>
     )
 }

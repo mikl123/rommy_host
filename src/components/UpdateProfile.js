@@ -1,9 +1,13 @@
 import React, { useRef, useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap"
+import { Form, Button, Card, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContexts";
 import { Link, useNavigate } from "react-router-dom"
 
 export default function UpdateProfile() {
+    let navigate1 = useNavigate(); 
+    const routeChange = (path) =>{ 
+      navigate1(path);
+    }
     const [isHover, setIsHover] = useState(false)
     const handleMouseEnter = () => {
         setIsHover(true);
@@ -47,7 +51,17 @@ export default function UpdateProfile() {
     }
 
     return(
-        <>
+        <div>
+            <div className="header">
+                <div className="logo">RooMy</div>
+                <div className="button_group">
+                    <button onClick={()=>routeChange("/")} className="header_button-login">Головна</button>
+                </div>
+            </div>
+            <div className="image">
+                {/* <img src={logo}></img> */}
+            </div>
+        <Container className='align-items-center justify-content-center' style = {{justifyContent: "center",  minHeight: '100vh', maxWidth: '400px', marginTop:"80px"}}>
         <Card>
             <Card.Body style={{color: "#542400", backgroundColor: "#FAECE1"}}>
                 <h2 className = 'text-center mb-4' style={{color: "#542400", fontFamily: "unset"}}><strong>Редагувати профіль</strong></h2>
@@ -76,6 +90,7 @@ export default function UpdateProfile() {
         <div className = 'w-100 text-center mt-2'>
             <Link style={{color: "#542400", fontFamily: "Forum"}} to="/">Скасувати</Link>
         </div>
-        </>
+        </Container>
+        </div>
     )
 }
