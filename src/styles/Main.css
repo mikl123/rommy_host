@@ -1,9 +1,12 @@
-html, body{
+ body{
     overflow-x: hidden;
     max-width: 100%;
+    font-family: 'Montserrat', sans-serif;
+
 }
 body > .container {
     padding: 60px 15px 100px;
+    
 }
 .main{
     background-color: #c8b8ad;
@@ -11,7 +14,6 @@ body > .container {
 .header{
     align-content: center;
     align-self: center;
-    
     width: 100%;
     display: grid;
     grid-template-areas: 'logo group';
@@ -46,7 +48,6 @@ body > .container {
 }
 .header_button-login{
     grid-area: "button1";
-    font-family: Forum;
     font-size: 12px;
     border: none;
     background-color: #542400;
@@ -59,7 +60,6 @@ body > .container {
 }
 .header_button-signup{
     grid-area: "button2";
-    font-family: Forum;
     font-size: 12px;
     border: none;
     background-color: #542400;
@@ -72,7 +72,6 @@ body > .container {
 }
 .header_button-home{
     grid-area: "button3";
-    font-family: Forum;
     font-size: 12px;
     border: none;
     background-color: #542400;
@@ -134,7 +133,6 @@ img {
     margin: 30px;
     margin-top: -40px;
     font-size: 150%;
-    font-family: Forum;
     padding: 15px 10px 20px 7px;
     text-align: left;
 }
@@ -148,7 +146,6 @@ img {
     color: #542400;
     margin: 30px;
     font-size: 150%;
-    font-family: Forum;
     text-align: left;
 }
 

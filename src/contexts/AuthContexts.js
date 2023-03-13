@@ -1,20 +1,22 @@
 import { auth } from "../firebase";
 import React, { useContext, useState, useEffect } from "react";
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
-
+import { useNavigate } from "react-router-dom"
 
 const AuthContext = React.createContext()
-
 export function useAuth() {
     return useContext(AuthContext)
 }
 
 export function AuthProvider({ children }) {
+let navigate1 = useNavigate();
+
     const [currentUser, setCurrentUser] = useState()
     const [loading, setLoading] = useState(true)
     const signInWithGoogle = () => {
         signInWithPopup(auth, new GoogleAuthProvider()).then((result) => {
             console.log(result)
+            navigate1("/")
         })
         .catch((error) => {
             console.log(error);
