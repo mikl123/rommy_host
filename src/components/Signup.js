@@ -1,4 +1,3 @@
-import { logDOM } from "@testing-library/react";
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContexts";
@@ -25,6 +24,7 @@ export default function Signup() {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
+    const { signInWithGoogle } = useAuth()
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -76,6 +76,9 @@ export default function Signup() {
                         <Form.Label style={{color: "#542400", fontFamily: "Forum"}}>Підтвердження паролю</Form.Label>
                         <Form.Control type = 'password' ref = {passwordConfirmRef} required></Form.Control>
                     </Form.Group>
+                    <div>
+                        <button style={{color: "#ffffff", backgroundColor: "#542400", borderRadius: "5px", border: "#542400", fontFamily: "Forum", width: "340px", height: "67px", fontSize: "20px", marginTop: "10px"}} onClick={signInWithGoogle}>Зареєструватися з Google</button>
+                    </div>
                     <Button disabled = {loading} className = 'w-100' type = 'submit' 
                     style={{backgroundColor: "#542400", border: "#542400", marginTop: "35px", height: "65px", fontFamily: "Forum", fontSize: "20px", backgroundColor: isHover ? '#896347' : 'rgb(84, 36, 0)', color: isHover ? 'white' : 'white', padding: '15px'}}
                     onMouseEnter={handleMouseEnter}
