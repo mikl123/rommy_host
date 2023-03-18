@@ -58,7 +58,7 @@ export default function Signup() {
             <Container className='align-items-center justify-content-center' style={{ justifyContent: "center", minHeight: '100vh', maxWidth: '400px', marginTop: "80px" }}>
                 <Card>
                     <Card.Body style={{ backgroundColor: "#FAECE1" }}>
-                        <h2 className='text-center mb-4' style={{ color: "#542400", fontFamily: "unset" }}>Зареєструватися</h2>
+                        <h2 className='text-center mb-4' style={{ color: "#542400", fontFamily: "unset" }}>Зареєструвати</h2>
                         {error && <Alert variant='danger'>{error}</Alert>}
                         <Form style={{ height: "450px" }} onSubmit={handleSubmit}>
                             <Form.Group id='name'>
@@ -78,14 +78,11 @@ export default function Signup() {
                                 <Form.Control type='password' ref={passwordConfirmRef} required></Form.Control>
                             </Form.Group>
                             <div>
-                                <button type="submit" style={{ color: "#ffffff", backgroundColor: "#542400", borderRadius: "5px", border: "#542400", fontFamily: "Forum", width: "340px", height: "67px", fontSize: "20px", marginTop: "10px" }} onClick={signInWithGoogle}>Зареєструватися з Google</button>
-                            </div>
-                            <div>
                                 <Button disabled={loading} className='w-100' type='submit'
                                     style={{ backgroundColor: "#542400", border: "#542400", marginTop: "35px", height: "65px", fontFamily: "Forum", fontSize: "20px", backgroundColor: isHover ? '#896347' : 'rgb(84, 36, 0)', color: isHover ? 'white' : 'white', padding: '15px', marginTop: "20px" }}
                                     onMouseEnter={handleMouseEnter}
                                     onMouseLeave={handleMouseLeave}>
-                                    <p>Зареєструватися</p>
+                                    <p>Зареєструвати</p>
                                 </Button>
                             </div>
                         </Form>

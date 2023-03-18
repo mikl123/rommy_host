@@ -15,7 +15,6 @@ function Main_Page() {
                 <div className="logo">RooMy</div>
                 <div className="button_group">
                     <button onClick={()=>routeChange("login")} className="header_button-login">Увійти</button>
-                    <button onClick={()=>routeChange("signup")} className="header_button-signup">Зареєструватися</button>
                 </div>
             </div>
             <div>
