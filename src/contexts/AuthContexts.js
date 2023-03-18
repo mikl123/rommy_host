@@ -11,7 +11,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
 let navigate1 = useNavigate();
 
-    const [currentUser, setCurrentUser] = useState()
+    const [currentUser, setCurrentUser] = useState(Object)
     const [loading, setLoading] = useState(true)
     const signInWithGoogle = () => {
         signInWithPopup(auth, new GoogleAuthProvider()).then((result) => {

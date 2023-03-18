@@ -1,0 +1,167 @@
+.furniture_block+.furniture_block {
+    margin-top: 30px;
+}
+
+.furniture_block {
+    border-top: 1px solid gray;
+}
+
+.header_furniture {
+    padding: 20px;
+}
+
+.header_furniture label {
+    font-size: 15px;
+}
+.file_div{
+
+    align-items: center;
+}
+.body_furniture select {
+    margin: 0 0 10px 0;
+    outline: none;
+}
+
+.body_furniture {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.body_furniture textarea {
+    /* resize: none; */
+    position: relative;
+    resize: vertical;
+}
+.file_input {
+    color: transparent;
+    position: relative;
+}
+.file_input::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+.file_input::before {
+    color: black;
+    border-radius: 10px;
+    content: 'Upload File ⇯';
+    display: inline-block;
+    border: 1px solid #999;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 10pt;
+    padding: 20px 70px;
+    background-color: rgb(223, 216, 232);
+    font-size: 15px;
+}
+
+.file_input:hover::before {
+    border-color: black;
+}
+
+.file_input:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+.file_div {
+    /* padding: 10px; */
+    /* width: 100%; */
+    /* background-color: #000; */
+}
+
+.obj_input {
+    max-width: 600px;
+    width: 100%;
+}
+
+.step_2 {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.main_div {
+    background-color: white;
+    padding: 20px 20px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.user_label {
+    display: block;
+    padding-bottom: 10px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.user_div_inner+.user_div_inner {
+    padding-top: 30px;
+}
+
+.button_next {
+    margin-top: 20px;
+    border: none;
+    padding: 10px 50px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border: 1px solid gray;
+    transition: .5s all;
+    background-color: rgb(223, 216, 232);
+
+}
+
+.button_next:hover {
+    border: 1px solid black;
+
+}
+
+.user_input {
+    padding: 10px;
+    outline: none;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    transition: all .5s;
+    border: 1px solid rgb(86, 85, 85);
+}
+
+.user_input:hover {
+    border: 1px solid black;
+}
+.text_header{
+padding: 10px 20px;
+font-size: large;
+    text-align: left;
+}
+.obj_description {
+    padding: 10px;
+    outline: none;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    transition: all .5s;
+    width: 90%;
+    border: 1px solid gray;
+    min-height: 40px;
+}
+
+.obj_description:hover {
+    border: 1px solid black;
+}
+
+.select_owner {
+    width: 50%;
+    padding: 5px;
+}
+
+.select_owner option {
+    border: none;
+    border-radius: 10px;
+}
+.error_block{
+    background-color: rgb(189, 48, 48);
+    color: #ffffff;
+    padding: 10px;
+    margin-bottom: 20px;
+}
