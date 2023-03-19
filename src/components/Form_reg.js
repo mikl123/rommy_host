@@ -1,6 +1,7 @@
 import "../styles/Form_reg.css"
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 import {
     ref,
     uploadBytes,
@@ -19,6 +20,10 @@ function Form_reg(props) {
     const [step, setStep] = useState(1)
     const [stepfur, setStepfur] = useState(0)
     const [error, setError] = useState("")
+    let navigate = useNavigate(); 
+    const routeChange = (path) =>{ 
+      navigate(path);
+    }
     console.log(room)
     function uuidv4() {
         return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
@@ -52,12 +57,12 @@ function Form_reg(props) {
         for (const [index, user_name] of room.names.entries()) {
             if (user_name === "") {
                 let index_pr = index + 1
-                setError("You should input name for " + index_pr + " user.")
+                setError("Введіть ім'я " + index_pr + " мешканця.")
                 return;
             } else {
                 if (user_name.length < 5) {
                     let index_pr = index + 1
-                    setError("You should input full name for " + index_pr + " user.")
+                    setError("Введіть ім'я та прізвище " + index_pr + " мешканця.")
                     return;
                 }
             }
@@ -67,7 +72,7 @@ function Form_reg(props) {
     function checkFurniture_inp() {
         for (const [index, furniture] of room.furniture_list.entries()) {
             if (furniture.description === "") {
-                setError("You should input description for " + furniture.type_expanded)
+                setError("Опишіть " + furniture.type_expanded)
                 return;
             } else {
             }
@@ -84,6 +89,7 @@ function Form_reg(props) {
                 const res = await uploadFile(furnit.images, room.number);
                 furnit.images = res
                 new_furniture_list.push(furnit)
+                
             } else {
                 new_furniture_list.push(furnit)
             }
@@ -93,6 +99,7 @@ function Form_reg(props) {
         axios.post(`http://127.0.0.1:5000/room/${id_coded}/submit`, room)
             .then(res => {
                 console.log(res.data)
+                routeChange("/")
             }).catch(err =>
                 console.log(err))
     }
@@ -109,18 +116,18 @@ function Form_reg(props) {
                                 {room.names.map((ele, index) => (
                                     <div className="user_div_inner">
                                         <label className="user_label" key={"user_" + index}>
-                                            Ім'я мешканця {index + 1}
+                                            Ім'я {index + 1} мешканця
                                         </label>
-                                        <input placeholder="text" className="user_input" type="text" key={"inp_user_" + index} onChange={(e) => handleChangeUser(index, e.target.value)} value={room.names[index]} />
+                                        <input placeholder="Введіть ім'я" className="user_input" type="text" key={"inp_user_" + index} onChange={(e) => handleChangeUser(index, e.target.value)} value={room.names[index]} />
                                     </div>
                                 ))}
 
-                                <button className="button_next" key="button_users" onClick={(e) => checkUsers_inp()}>Next</button>
+                                <button className="button_next" key="button_users" onClick={(e) => checkUsers_inp()}>Далі</button>
                             </div>)
 
                         case 2:
                             return (<>
-                                <p className="step_2">Step2 ➧</p>
+                                <strong><p className="step_2">Крок 2</p></strong>
                                 {room.furniture_list.map((block, index_block) => (
                                     <>
                                         {(() => {
@@ -131,7 +138,7 @@ function Form_reg(props) {
                                                             {block.map((ele, index) => (<>
                                                                 <div key={"div_" + index} className='furniture_block'>
                                                                     <div key={"div_header_" + index} className="header_furniture">
-                                                                        <div className="text_header">{index + ")    "} {ele.type_expanded}<br /></div>
+                                                                        <div className="text_header"><strong>{index+1 + ")    "} {ele.type_expanded}<br /></strong></div>
                                                                         {ele.questions}
                                                                     </div>
                                                                     <div key={"div_body_" + index} className="body_furniture">
@@ -147,7 +154,7 @@ function Form_reg(props) {
                                                                                 onChange={(e) => handleChangeRoom(index, index_block, "description", e.target.value)}
                                                                                 value={room.furniture_list[index_block][index].description}
                                                                                 key={"inp_" + index + index_block} type="text"
-                                                                                placeholder={"Enter data"} />
+                                                                                placeholder={"Опишіть стан"} />
                                                                         </div>
                                                                         <div className="file_div">
                                                                             <input
@@ -155,8 +162,8 @@ function Form_reg(props) {
                                                                                 type="file"
                                                                                 onChange={(event) => {
                                                                                     handleChangeRoom(index, index_block, "images", event.target.files[0])
-                                                                                }}
-                                                                            />
+                                                                                }}>
+                                                                            </input>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -168,7 +175,7 @@ function Form_reg(props) {
                                                                 } else {
                                                                     setStepfur((prev) => prev + 1)
                                                                 }
-                                                            }}>Next</button>
+                                                            }}>Далі</button>
                                                         </div>
                                                     </>)
                                             }
@@ -181,14 +188,14 @@ function Form_reg(props) {
                             </>)
                         case 3:
                             return (<div key="rules_div">
-                                Rules
-                                <input
+                                <label className="rules">Я погоджуюсь з правилами колегіуму</label>
+                                <input className="square"
                                     key="check_rules"
                                     type="checkbox"
                                     checked={ruleAccepted}
                                     onChange={(e) => setRuleAccepted(e.target.value)}
                                 />
-                                <input onClick={handle_post} key="submit_button" type={"submit"} />
+                                <input className="submit_form" value = "Відправити" onClick={handle_post} key="submit_button" type={"submit"} />
                             </div>)
                         default:
                             return null
