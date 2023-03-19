@@ -1,7 +1,7 @@
 import "../styles/Main.css"
 import { useNavigate } from "react-router-dom";
 import logo from './collegium.png'
-import { Container } from "react-bootstrap";
+import  { MapComponent } from './Map.js';
 function Main_Page() {
 
     let navigate = useNavigate(); 
@@ -14,7 +14,7 @@ function Main_Page() {
             <div className="header">
                 <div className="logo">RooMy</div>
                 <div className="button_group">
-                    <button onClick={()=>routeChange("login")} className="header_button-login">Увійти</button>
+                    <button onClick={()=>routeChange("login")} className="header_button-login">Куратор</button>
                 </div>
             </div>
             <div>
@@ -49,7 +49,9 @@ function Main_Page() {
                 </div>
                 <div className="greeting">
                     <strong><p>Вітаємо вдома!</p></strong>
+                    <MapComponent />
                 </div>
+
             </div>
         </div>
 
