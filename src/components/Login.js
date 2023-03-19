@@ -2,7 +2,8 @@ import { logDOM } from "@testing-library/react";
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContexts";
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
+import  { MapComponent } from './Map.js';
 
 export default function Login() {
     let navigate1 = useNavigate(); 
@@ -49,7 +50,7 @@ export default function Login() {
             <div className="image">
                 {/* <img src={logo}></img> */}
             </div>
-        <Container className='align-items-center justify-content-center' style = {{justifyContent: "center",  minHeight: '200vh', maxWidth: '400px', marginTop:"80px"}}>
+        <Container className='align-items-center justify-content-center' style = {{justifyContent: "center",  minHeight: '60vh', maxWidth: '400px', marginTop:"80px"}}>
         <Card>
             <Card.Body style={{backgroundColor: "#FAECE1"}}>
                 <h2 className = 'text-center mb-4' style={{color: "#542400", fontFamily: "unset"}}><strong>Увійти</strong></h2>
@@ -78,6 +79,10 @@ export default function Login() {
             <Link style={{color: "#542400", fontFamily: "Forum", marginTop: "40px"}} to="/forgot-password">Забув пароль?</Link>
         </div>
         </Container>
+        <div className="greeting">
+            <strong><p>Вітаємо вдома!</p></strong>
+            <MapComponent />
+        </div>
         </div>
     )
 }
