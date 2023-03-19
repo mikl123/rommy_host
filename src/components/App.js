@@ -47,7 +47,7 @@ function App() {
 
   return (
     <div>
-      <div className='w-100 outer'>
+      <div className='w-100 h-100 outer'>
       {currentUser ? <>
             <div>You are logged in</div>
           </> : 

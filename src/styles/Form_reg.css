@@ -13,10 +13,12 @@
 .header_furniture label {
     font-size: 15px;
 }
-.file_div{
+
+.file_div {
 
     align-items: center;
 }
+
 .body_furniture select {
     margin: 0 0 10px 0;
     outline: none;
@@ -33,13 +35,16 @@
     position: relative;
     resize: vertical;
 }
+
 .file_input {
     color: transparent;
     position: relative;
 }
+
 .file_input::-webkit-file-upload-button {
     visibility: hidden;
-  }
+}
+
 .file_input::before {
     color: black;
     border-radius: 10px;
@@ -89,52 +94,68 @@
 }
 
 .user_label {
+    text-align: center;
+    margin: 0 auto;
     display: block;
     padding-bottom: 10px;
     font-size: 15px;
     font-weight: 500;
+    color: #542400;
+
 }
 
 .user_div_inner+.user_div_inner {
-    padding-top: 30px;
+
+    /* padding-top: 30px; */
+    align-items: center;
+    align-self: center;
 }
 
 .button_next {
-    margin-top: 20px;
+    display: block;
     border: none;
+    margin: 20px auto;
     padding: 10px 50px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 15px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    color: #542400;
     border: 1px solid gray;
-    transition: .5s all;
-    background-color: rgb(223, 216, 232);
-
+    transition: .3s all;
+    background-color: #FAECE1;
 }
 
 .button_next:hover {
     border: 1px solid black;
-
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .user_input {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    align-self: center;
     padding: 10px;
+    max-width: 300px;
+    min-width: 200px;
     outline: none;
     border: 1px solid transparent;
     border-radius: 10px;
     transition: all .5s;
     border: 1px solid rgb(86, 85, 85);
+    color: #542400;
 }
 
 .user_input:hover {
     border: 1px solid black;
 }
-.text_header{
-padding: 10px 20px;
-font-size: large;
+
+.text_header {
+    padding: 10px 20px;
+    font-size: large;
     text-align: left;
 }
+
 .obj_description {
     padding: 10px;
     outline: none;
@@ -159,7 +180,8 @@ font-size: large;
     border: none;
     border-radius: 10px;
 }
-.error_block{
+
+.error_block {
     background-color: rgb(189, 48, 48);
     color: #ffffff;
     padding: 10px;

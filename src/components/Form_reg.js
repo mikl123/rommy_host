@@ -17,6 +17,7 @@ function Form_reg(props) {
     const [room, setRoom] = useState(props.room);
     const [ruleAccepted, setRuleAccepted] = useState(false);
     const [step, setStep] = useState(1)
+    const [stepfur, setStepfur] = useState(0)
     const [error, setError] = useState("")
     console.log(room)
     function uuidv4() {
@@ -108,7 +109,7 @@ function Form_reg(props) {
                                 {room.names.map((ele, index) => (
                                     <div className="user_div_inner">
                                         <label className="user_label" key={"user_" + index}>
-                                            Ім'я сусіда {index+1}
+                                            Ім'я мешканця {index + 1}
                                         </label>
                                         <input placeholder="text" className="user_input" type="text" key={"inp_user_" + index} onChange={(e) => handleChangeUser(index, e.target.value)} value={room.names[index]} />
                                     </div>
@@ -116,41 +117,67 @@ function Form_reg(props) {
 
                                 <button className="button_next" key="button_users" onClick={(e) => checkUsers_inp()}>Next</button>
                             </div>)
-                        
+
                         case 2:
                             return (<>
                                 <p className="step_2">Step2 ➧</p>
-                                <div className='furniture_list' key="furniture_div">
-                                    {room.furniture_list.map((ele, index) => (
-                                        <div key={"div_" + index} className='furniture_block'>
-                                            <div key={"div_header_" + index} className="header_furniture">
-                                                <div className="text_header">{index + ")    "} {ele.type_expanded}<br /></div>
-                                                {ele.questions}
-                                            </div>
-                                            <div key={"div_body_" + index} className="body_furniture">
-                                                {ele.type === "bed" ? <div><select className="select_owner" onChange={(e) => handleChangeRoom(index, "owner", e.target.value)}>
-                                                    {room.names.map((elem, index_user) => (
-                                                        <option key={"opt_" + index + "_" + index_user} value={elem}>{elem}</option>
-                                                    ))}
-                                                </select></div> : <></>}
+                                {room.furniture_list.map((block, index_block) => (
+                                    <>
+                                        {(() => {
+                                            switch (stepfur) {
+                                                case index_block:
+                                                    return (<>
+                                                        <div className='furniture_list' key="furniture_div">
+                                                            {block.map((ele, index) => (<>
+                                                                <div key={"div_" + index} className='furniture_block'>
+                                                                    <div key={"div_header_" + index} className="header_furniture">
+                                                                        <div className="text_header">{index + ")    "} {ele.type_expanded}<br /></div>
+                                                                        {ele.questions}
+                                                                    </div>
+                                                                    <div key={"div_body_" + index} className="body_furniture">
+                                                                        {ele.type === "bed" ? <div><select className="select_owner"
+                                                                            onChange={(e) => handleChangeRoom(index, index_block, "owner", e.target.value)}>
+                                                                            {room.names.map((elem, index_user) => (
+                                                                                <option key={"opt_" + index + "_" + index_user + index_block} value={elem}>{elem}</option>
+                                                                            ))}
+                                                                        </select></div> : <></>}
 
-                                                <div className="obj_input">
-                                                    <textarea className="obj_description" onChange={(e) => handleChangeRoom(index, "description", e.target.value)} value={room.furniture_list[index].description} key={"inp_" + index} type="text" placeholder={"Enter data"} />
-                                                </div>
-                                                <div className="file_div">
-                                                    <input
-                                                        className="file_input"
-                                                        type="file"
-                                                        onChange={(event) => {
-                                                            handleChangeRoom(index, "images", event.target.files[0])
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                    <button className="button_next" key="button_room" onClick={(e) => setStep((prev) => prev + 1)}>Next</button>
-                                </div>
+                                                                        <div className="obj_input">
+                                                                            <textarea className="obj_description"
+                                                                                onChange={(e) => handleChangeRoom(index, index_block, "description", e.target.value)}
+                                                                                value={room.furniture_list[index_block][index].description}
+                                                                                key={"inp_" + index + index_block} type="text"
+                                                                                placeholder={"Enter data"} />
+                                                                        </div>
+                                                                        <div className="file_div">
+                                                                            <input
+                                                                                className="file_input"
+                                                                                type="file"
+                                                                                onChange={(event) => {
+                                                                                    handleChangeRoom(index, index_block, "images", event.target.files[0])
+                                                                                }}
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </>))}
+                                                            <button className="button_next" key="button_room" onClick={(e) => {
+                                                                if (stepfur+1 >= room.furniture_list.length) {
+                                                                    setStep((prev) => prev + 1)
+                                                                } else {
+                                                                    setStepfur((prev) => prev + 1)
+                                                                }
+                                                            }}>Next</button>
+                                                        </div>
+                                                    </>)
+                                            }
+
+                                        })()}
+                                    </>
+
+                                ))}
+
                             </>)
                         case 3:
                             return (<div key="rules_div">

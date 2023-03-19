@@ -19,10 +19,13 @@
     font-size: larger;
 }
 .reg_text_div{
-  padding: 20px 0 20px;
+  padding: 10px 0 10px;
   font-size: 20px;
-  font-weight: 700;
-  background-color: rgb(223, 216, 232);
+  font-weight: 400;
+  background-color: #FAECE1;
+  text-align:  center;
+  color:#542400 ;
+
 }
 @keyframes spin {
   0% { transform: rotate(0deg); }
