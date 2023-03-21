@@ -53,7 +53,7 @@ class Room(db.Document):
                 small_list.append(json.loads(furniture.to_json()))
             new_list.append(small_list)
 
-            # [json.loads(furniture.to_json())] 
+            # [json.loads(furniture.to_json())]
         return json.dumps({
             "number":self.number,
             "names":self.names,
@@ -65,12 +65,11 @@ class Room(db.Document):
         self.number = json_obj["number"]
         self.names = json_obj["names"]
 
-        for index, furniture in enumerate(self.furniture_list):
-            for data in json_obj["furniture_list"]:
-                if data["type"] == furniture.type:
-                    furniture.description = data["description"]
-                    furniture.owner = data["owner"]
-                    furniture.save()
+        for furniture_lists in zip(self.furniture_list,json_obj["furniture_list"]):
+            for furniture in zip(furniture_lists[0], furniture_lists[1]):
+                furniture[0].description = furniture[1]["description"]
+                furniture[0].owner = furniture[1]["owner"]
+                furniture[0].save()
 
 class User(db.Document):
 
@@ -99,18 +98,21 @@ def create_user():
     new_user = User(name = data.name, user_type = "USER", rooms = rooms_user)
     new_user.save()
 
-@app.route("/get_rooms")
+@app.route("/login", methods = ["POST"])
+@cross_origin()
 def get_rooms():
     data = request.data.decode("utf-8")
-    user_rooms = User.objects(uuid = data.uuid).first().rooms
-    return user_rooms
+    print(data)
+    return "logged"
+    # user_rooms = User.objects(uuid = data.uuid).first().rooms
+    # return user_rooms
 
 @app.route("/add")
 @cross_origin()
 def hello():
     for number_room in range(419, 435):
         
-        furniture1_1 = Furniture(type= "door", type_expanded = "Вхідні двері", questions = "Розпочнімо з входу! Детально огляньте двері та стіни навколо них, якщо під час огляду ви виявили плями, подряпини, потертості, то обов’язково сфотографуйте й прикріпіть нижче.", priority = 1)
+        furniture1_1 = Furniture(type= "door", type_expanded = "Вхідні двері", questions = "Розпочнімо з входу! Детально огляньте двері та стіни навколо них, якщо під час огляду ви виявили плями, подряпини, потертості, то обов’язково сфотографуйте й прикріпіть нижче.",priority = 1)
         furniture1_1.save()
         furniture1_2 = Furniture(type= "basebord",type_expanded = "Плінтус", questions = "Також огляньте плінтуси, якщо вони пошкоджені – сфотографуйте й вкажіть на недоліки.", priority = 2)
         furniture1_2.save()
@@ -191,7 +193,8 @@ def add_room_info(encoded):
     print(encoded)
     data = request.data.decode("utf-8")
     json4ik = json.loads(data, strict=False)
-    room = Room.objects(id = encoded).first()
+    room_id = f.decrypt(encoded).decode()
+    room = Room.objects(id = room_id).first()
     room.update_json(json4ik)
     room.save()
     return "add"

@@ -1,5 +1,5 @@
 .furniture_block+.furniture_block {
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
 .furniture_block {
@@ -7,13 +7,14 @@
 }
 
 .header_furniture {
-    padding: 20px;
+    width: 350px;
+    padding: 10px 30px 10px 10px;
+    text-align: left;
 }
 
 .header_furniture label {
     font-size: 15px;
 }
-
 .file_div {
 
     align-items: center;
@@ -25,85 +26,105 @@
 }
 
 .body_furniture {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
 }
 
 .body_furniture textarea {
-    /* resize: none; */
-    position: relative;
-    resize: vertical;
+    text-align: justify;
 }
 
 .file_input {
-    color: transparent;
-    position: relative;
+    content: 'Додати фото';
 }
 
 .file_input::-webkit-file-upload-button {
+    content: 'Додати фото';
     visibility: hidden;
 }
 
 .file_input::before {
-    color: black;
-    border-radius: 10px;
-    content: 'Upload File ⇯';
+    margin-left: 30px;
+    color: #542400;
+    border-radius: 5px;
+    content: 'Додати фото';
     display: inline-block;
-    border: 1px solid #999;
-    border-radius: 3px;
-    outline: none;
+    border: 2px solid #542400;
     cursor: pointer;
-    text-shadow: 1px 1px #fff;
-    font-weight: 700;
-    font-size: 10pt;
-    padding: 20px 70px;
-    background-color: rgb(223, 216, 232);
-    font-size: 15px;
+    font-family: Forum;
+    font-size: 150%;
+    padding: 5px;
+    background-color: #c8b8ad;
+    width: 240px;
+    height: 50px;
+    text-align: center
 }
 
 .file_input:hover::before {
-    border-color: black;
+    content: 'Додати фото';
+    border-color: #ffffff;
 }
 
 .file_input:active::before {
+    content: 'Додати фото';
     background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
 
 .file_div {
-    /* padding: 10px; */
-    /* width: 100%; */
-    /* background-color: #000; */
+    /* width: 1000%; */
 }
 
 .obj_input {
-    max-width: 600px;
-    width: 100%;
+    align-items: center;
+    width: 100px;
+    height: 100px;
 }
 
 .step_2 {
-    font-weight: 500;
-    font-size: 20px;
+    font-size: 30px;
+    font-family: Forum;
 }
 
 .main_div {
     background-color: white;
-    padding: 20px 20px;
-    margin: 0 auto;
-    align-items: center;
+    padding: 50px;
 }
 
 .user_label {
-    text-align: center;
-    margin: 0 auto;
-    display: block;
+    font-size: 90%;
     padding-bottom: 10px;
-    font-size: 15px;
     font-weight: 500;
     color: #542400;
 
 }
 
+.user_div_inner {
+    font-family: Forum;
+    font-size: 150%;
+    text-align: center;
+    padding-top: 30px;
+}
+
+.button_next {
+    margin-top: 35px;
+    margin-left: 30px;
+    border: none;
+    padding: 5px 70px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 150%;
+    font-family: Forum;
+    color: #ffffff;
+    border: 1px solid gray;
+    transition: .5s all;
+    background-color: #542400;
+    width: 240px;
+    height: 50px;
+
+}
+
+.button_next:hover {
+    background-color: #896347;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
 .user_div_inner+.user_div_inner {
 
     /* padding-top: 30px; */
@@ -149,7 +170,6 @@
 .user_input:hover {
     border: 1px solid black;
 }
-
 .text_header {
     padding: 10px 20px;
     font-size: large;
@@ -157,14 +177,13 @@
 }
 
 .obj_description {
-    padding: 10px;
-    outline: none;
-    border: 1px solid transparent;
+    margin-bottom: 150px;
+    padding: 15px;
     border-radius: 10px;
     transition: all .5s;
-    width: 90%;
+    width: 300px;
     border: 1px solid gray;
-    min-height: 40px;
+    min-height: 60px;
 }
 
 .obj_description:hover {
@@ -186,4 +205,28 @@
     color: #ffffff;
     padding: 10px;
     margin-bottom: 20px;
+}
+.submit_form{
+    text-align: center;
+    margin-top: 35px;
+    margin-left: 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 150%;
+    font-family: Forum;
+    color: #ffffff;
+    border: 1px solid gray;
+    transition: .5s all;
+    background-color: #542400;
+    width: 240px;
+    height: 50px;
+}
+.submit_form:hover {
+    background-color: #896347;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.rules {
+    font-size: 100%;
+    text-align: center;
 }

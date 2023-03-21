@@ -1,8 +1,8 @@
-import { logDOM } from "@testing-library/react";
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContexts";
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
+import  { MapComponent } from './Map.js';
 
 export default function Login() {
     let navigate1 = useNavigate(); 
@@ -23,7 +23,6 @@ export default function Login() {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
-    const { signInWithGoogle } = useAuth()
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -31,7 +30,7 @@ export default function Login() {
             setError('')
             setLoading(true)
             await login(emailRef.current.value, passwordRef.current.value)
-            navigate("/")
+            navigate("/curator")
         } catch {
             setError('Не вдалося увійти')
         }
@@ -49,12 +48,12 @@ export default function Login() {
             <div className="image">
                 {/* <img src={logo}></img> */}
             </div>
-        <Container className='align-items-center justify-content-center' style = {{justifyContent: "center",  minHeight: '200vh', maxWidth: '400px', marginTop:"80px"}}>
+        <Container className='align-items-center justify-content-center' style = {{justifyContent: "center",  minHeight: '60vh', maxWidth: '400px', marginTop:"80px"}}>
         <Card>
             <Card.Body style={{backgroundColor: "#FAECE1"}}>
                 <h2 className = 'text-center mb-4' style={{color: "#542400", fontFamily: "unset"}}><strong>Увійти</strong></h2>
                 {error && <Alert variant = 'danger'>{error}</Alert>}
-                <Form onSubmit={handleSubmit} style={{height: "300px"}}>
+                <Form onSubmit={handleSubmit} style={{height: "230px"}}>
                     <Form.Group id = 'email'>
                         <Form.Label style={{color: "#542400", fontFamily: "Forum"}}>Корпоративна пошта</Form.Label>
                         <Form.Control type = 'email' ref = {emailRef} required></Form.Control>
@@ -63,9 +62,6 @@ export default function Login() {
                         <Form.Label style={{color: "#542400", fontFamily: "Forum"}}>Пароль</Form.Label>
                         <Form.Control type = 'password' ref = {passwordRef} required></Form.Control>
                     </Form.Group>
-                    <div>
-                        <button type="submit" style={{ color: "#ffffff", backgroundColor: "#542400", borderRadius: "5px", border: "#542400", fontFamily: "Forum", width: "340px", height: "67px", fontSize: "20px", marginTop: "10px" }} onClick={signInWithGoogle}>Увійти з Google</button>
-                    </div>
                     <Button disabled = {loading} className = 'w-100' type = 'submit' style={{backgroundColor: "#542400", border: "#542400", marginTop: "15px", height: "65px", fontFamily: "Forum", fontSize: "20px", backgroundColor: isHover ? '#896347' : 'rgb(84, 36, 0)', color: isHover ? 'white' : 'white', padding: '15px'}}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}>
@@ -78,6 +74,10 @@ export default function Login() {
             <Link style={{color: "#542400", fontFamily: "Forum", marginTop: "40px"}} to="/forgot-password">Забув пароль?</Link>
         </div>
         </Container>
+        <div className="greeting">
+            <strong><p>Вітаємо вдома!</p></strong>
+            <MapComponent />
+        </div>
         </div>
     )
 }

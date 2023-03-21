@@ -1,8 +1,13 @@
 import "../styles/Main.css"
 import { useNavigate } from "react-router-dom";
 import logo from './collegium.png'
+<<<<<<< HEAD
 import { Container } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContexts"
+=======
+import  { MapComponent } from './Map.js';
+function Main_Page() {
+>>>>>>> 0e3edd71952ba2ace24d46a75fbfe2883f13f1a7
 
 function Main_Page() {
     const { role } = useAuth()
@@ -16,10 +21,14 @@ function Main_Page() {
             <div className="header">
                 <div className="logo">RooMy</div>
                 <div className="button_group">
+<<<<<<< HEAD
                     <button onClick={() => routeChange("login")} className="header_button-login">Увійти</button>
                     {role != "ADMIN" ? <>
                         <button onClick={() => routeChange("signup")} className="header_button-login">Зареєструвати</button>
                     </> : <></>}
+=======
+                    <button onClick={()=>routeChange("login")} className="header_button-login">Куратор</button>
+>>>>>>> 0e3edd71952ba2ace24d46a75fbfe2883f13f1a7
                 </div>
             </div>
             <div>
@@ -54,7 +63,9 @@ function Main_Page() {
                 </div>
                 <div className="greeting">
                     <strong><p>Вітаємо вдома!</p></strong>
+                    <MapComponent />
                 </div>
+
             </div>
         </div>
 

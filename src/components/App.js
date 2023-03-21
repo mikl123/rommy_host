@@ -13,8 +13,12 @@ import Main_Form from "./Main_Form"
 import About from "./About"
 import Rules from "./Rules"
 import { useAuth } from "../contexts/AuthContexts"
+<<<<<<< HEAD
 import Rooms from './Rooms';
 import Curator_menager from './Curator_menager';
+=======
+import Curator from './Curator';
+>>>>>>> 0e3edd71952ba2ace24d46a75fbfe2883f13f1a7
 // class App extends Component {
 //   state = {
 //     selectedFile: null
@@ -67,8 +71,8 @@ function App() {
           <Route path="/" element={<Main_Page />} />
           <Route path="/about" element={<About />} />
           <Route path="/rules" element={<Rules />} />
+          <Route path="/curator" element={<Curator />} />
           <Route path="/rooms/:id_coded" element={<Main_Form />} />
-          <Route path="*" element={<div>No this page</div>} />
         </Routes>
       </div>
     </div>
