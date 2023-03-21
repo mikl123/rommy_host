@@ -13,6 +13,8 @@ import Main_Form from "./Main_Form"
 import About from "./About"
 import Rules from "./Rules"
 import { useAuth } from "../contexts/AuthContexts"
+import Rooms from './Rooms';
+import Curator_menager from './Curator_menager';
 // class App extends Component {
 //   state = {
 //     selectedFile: null
@@ -43,16 +45,20 @@ import { useAuth } from "../contexts/AuthContexts"
 // }
 
 function App() {
-  const { currentUser } = useAuth()
-
+  const { currentUser, role } = useAuth()
+  console.log(currentUser)
   return (
     <div>
       <div className='w-100 h-100 outer'>
-      {currentUser ? <>
-            <div>You are logged in</div>
-          </> : 
-            <>You are not logged in</>}
         <Routes>
+          {currentUser ? <>
+            {/* {role === "ADMIN" ? <> */}
+            <Route exact path="/manager" element={<Curator_menager/>} />
+            {/* </> : <></>} */}
+            <Route exact path="/rooms" element={<Rooms user_id = {currentUser._delegate.uid} />} />
+          </> :
+            <></>}
+
           <Route exact path="/" element={<Main />} />
           <Route path="/update-profile" element={<UpdateProfile />} />
           <Route path="/signup" element={<Signup />} />

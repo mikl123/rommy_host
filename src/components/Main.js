@@ -2,19 +2,24 @@ import "../styles/Main.css"
 import { useNavigate } from "react-router-dom";
 import logo from './collegium.png'
 import { Container } from "react-bootstrap";
-function Main_Page() {
+import { useAuth } from "../contexts/AuthContexts"
 
-    let navigate = useNavigate(); 
-    const routeChange = (path) =>{ 
-      navigate(path);
+function Main_Page() {
+    const { role } = useAuth()
+    let navigate = useNavigate();
+    const routeChange = (path) => {
+        navigate(path);
     }
     return (
         <div className="main"
-        style = {{ minHeight: '100vh' }}>
+            style={{ minHeight: '100vh' }}>
             <div className="header">
                 <div className="logo">RooMy</div>
                 <div className="button_group">
-                    <button onClick={()=>routeChange("login")} className="header_button-login">Увійти</button>
+                    <button onClick={() => routeChange("login")} className="header_button-login">Увійти</button>
+                    {role != "ADMIN" ? <>
+                        <button onClick={() => routeChange("signup")} className="header_button-login">Зареєструвати</button>
+                    </> : <></>}
                 </div>
             </div>
             <div>
