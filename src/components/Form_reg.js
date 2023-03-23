@@ -85,7 +85,7 @@ function Form_reg(props) {
         console.log(room.furniture_list)
         for (let furnit_list of room.furniture_list) {
             for (let furnit of furnit_list) {
-                if (furnit.images.length !== 0) {
+                if (furnit.images !== null) {
                     console.log("grea")
                     const res = await uploadFile(furnit.images, room.number);
                     furnit.images = res
@@ -184,9 +184,7 @@ function Form_reg(props) {
                                             }
                                         })()}
                                     </>
-
                                 ))}
-
                             </>)
                         case 3:
                             return (<div key="rules_div">

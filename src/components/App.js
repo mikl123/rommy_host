@@ -13,12 +13,8 @@ import Main_Form from "./Main_Form"
 import About from "./About"
 import Rules from "./Rules"
 import { useAuth } from "../contexts/AuthContexts"
-<<<<<<< HEAD
 import Rooms from './Rooms';
 import Curator_menager from './Curator_menager';
-=======
-import Curator from './Curator';
->>>>>>> 0e3edd71952ba2ace24d46a75fbfe2883f13f1a7
 // class App extends Component {
 //   state = {
 //     selectedFile: null
@@ -59,10 +55,10 @@ function App() {
             {/* {role === "ADMIN" ? <> */}
             <Route exact path="/manager" element={<Curator_menager/>} />
             {/* </> : <></>} */}
-            <Route exact path="/rooms" element={<Rooms user_id = {currentUser._delegate.uid} />} />
+            <Route exact path="/rooms_curator" element={<Rooms user_id = {currentUser._delegate.uid} />} />
           </> :
             <></>}
-
+<Route exact path="/manager" element={<Curator_menager/>} />
           <Route exact path="/" element={<Main />} />
           <Route path="/update-profile" element={<UpdateProfile />} />
           <Route path="/signup" element={<Signup />} />
@@ -71,7 +67,6 @@ function App() {
           <Route path="/" element={<Main_Page />} />
           <Route path="/about" element={<About />} />
           <Route path="/rules" element={<Rules />} />
-          <Route path="/curator" element={<Curator />} />
           <Route path="/rooms/:id_coded" element={<Main_Form />} />
         </Routes>
       </div>
