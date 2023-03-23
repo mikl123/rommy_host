@@ -84,11 +84,11 @@ const Curator_menager = () => {
                 <form className = 'form_add_curator' onSubmit={(e) => create_new_user(e)}>
                     <div>
                         <label>Корпоративна пошта куратора</label>
-                        <p><input type="text" value={login_new} onChange={(e) => setLogin_new(e.target.value)} /></p>
+                        <p><input classname="info_curator" type="text" value={login_new} onChange={(e) => setLogin_new(e.target.value)} /></p>
                     </div>
                     <div> 
                         <label>Пароль</label>
-                        <p><input type="password" value={password_new} onChange={(e) => setPassword_new(e.target.value)} /></p></div>
+                        <p><input classname="info_curator" type="password" value={password_new} onChange={(e) => setPassword_new(e.target.value)} /></p></div>
                     <div>
                     <MultiSelect className='multiselect'
                         options={options}
@@ -104,13 +104,13 @@ const Curator_menager = () => {
                         <option key={"role_2"} value={"USER"}>Куратор</option>
                     </select></p>
                     </div>
-                    <div><input type="submit" value={"Створити куратора"} /></div>
+                    <div><input className='submit_curator' type="submit" value={"Створити куратора"} /></div>
                 </form>
 
             </> : <></>}
-            <div>{response.length === 0 ?
+            <div className="curator_list"> {response.length === 0 ?
                 <>
-                    No Users
+                    Немає кураторів
                 </> :
                 <>
                     {response.map((ele, index) => (
