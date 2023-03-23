@@ -3,7 +3,6 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-import Room from './Room';
 import { object } from 'prop-types';
 import "../styles/Curator.css"
 import { useAuth } from "../contexts/AuthContexts"
