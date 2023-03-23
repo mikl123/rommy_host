@@ -7,7 +7,8 @@ from cryptography.fernet import Fernet
 key = "Z6IIrLq-hAWCNUtSIvbOfeZ9LmPKy8QNFgpPFENyJ2U="
 f = Fernet(key)
 
-a = f.encrypt(b"6415808c5242820d8aa59972")
+a = f.encrypt(b"641c60f4f48a2ec50e91ee09")
+print(a)
 print(f.decrypt(a).decode())
 
 # Creating app
@@ -22,7 +23,7 @@ db = MongoEngine(app)
 class Furniture(db.Document):
     type = db.StringField()
     type_expanded = db.StringField()
-    images = db.ListField(db.StringField())
+    images = db.StringField()
     # user fields
 
     priority = db.IntField()
@@ -39,13 +40,16 @@ class Furniture(db.Document):
             "description":self.description,
             "questions":self.questions
         }, indent=5)
-
+    
 class Room(db.Document):
+
+    verified = db.BooleanField()
     number = db.IntField()
     names = db.ListField(db.StringField())
     furniture_list = db.ListField(db.ListField(db.ReferenceField(Furniture)))
 
     def to_json(self):
+        print(self.furniture_list)
         new_list = []
         for list_furniture in self.furniture_list:
             small_list = []
@@ -54,11 +58,12 @@ class Room(db.Document):
             new_list.append(small_list)
 
             # [json.loads(furniture.to_json())]
-        return json.dumps({
+        return {
             "number":self.number,
             "names":self.names,
-            "furniture_list":new_list
-        }, indent=5)
+            "furniture_list":new_list,
+            "verified": self.verified
+        }
 
     def update_json(self, json_obj):
 
@@ -69,43 +74,79 @@ class Room(db.Document):
             for furniture in zip(furniture_lists[0], furniture_lists[1]):
                 furniture[0].description = furniture[1]["description"]
                 furniture[0].owner = furniture[1]["owner"]
+                furniture[0].images = furniture[1]["images"]
                 furniture[0].save()
+
+    def verify(self):
+        self.verified = True
 
 class User(db.Document):
 
-    name = db.StringField()
-    rooms = db.ListField(db.ReferenceField(Room))
-    uuid = db.StringField()
+    rooms = db.ListField(db.ReferenceField(Room, dbref = False))
+    uid = db.StringField()
     user_type = db.StringField()
+    email = db.StringField()
 
-    def to_json(self):
-        return json.dumps({
-            "name":self.name,
-            "rooms":[json.loads(room.to_json()) for room in self.rooms]
-        }, indent = 5)
+    def to_json(self, full_info):
+        if full_info:
+            return ({
+
+                "rooms": [json.loads(room.to_json()) for room in self.rooms],
+                "uid":self.uid,
+                "user_type":self.user_type,
+                "email":self.email
+            })
+        else:
+            return ({
+
+                "rooms": [room.number for room in self.rooms],
+                "user_type":self.user_type,
+                "email":self.email
+            })
 
 @app.route("/create_admin")
 def create_admin():
-    user_admin = User(user_type = "ADMIN", uuid = "ZN9kWTtfexdxQTb0CsumNdl91NL2", name = "admin")
+    user_admin = User(user_type = "ADMIN", uid = "ZN9kWTtfexdxQTb0CsumNdl91NL2", name = "admin")
     user_admin.save()
 
-@app.route("/create_user")
-def create_user():
-    data = request.data.decode("utf-8")
+@app.route("/create_user", methods = ["POST"])
+def create_user_endpoint():
+    data = json.loads(request.data.decode("utf-8"))
+    rooms = data["rooms"].split(" ")
     rooms_user = []
-    for number_room in data.numbers:
-        rooms_user += Room.objects(number = number_room).first()
-    new_user = User(name = data.name, user_type = "USER", rooms = rooms_user)
+    for number_room in rooms:
+        rooms_user += [Room.objects(number = number_room).first()]
+    print(data)
+    new_user = User(uid = data["uid"], email = data["email"] , user_type = data["role"] , rooms = rooms_user)
     new_user.save()
+    return "user_created"
+
 
 @app.route("/login", methods = ["POST"])
 @cross_origin()
-def get_rooms():
-    data = request.data.decode("utf-8")
-    print(data)
-    return "logged"
-    # user_rooms = User.objects(uuid = data.uuid).first().rooms
+def login():
+    data = json.loads(request.data.decode("utf-8"))
+    user = User.objects(uid = data["uid"]).first()
+    if not user:
+        return "No login"
+    return user.user_type
+    # user_rooms = User.objects(uid = data.uuid).first().rooms
     # return user_rooms
+
+@app.route("/curators")
+@cross_origin()
+def curators():
+    users = User.objects()
+    jsoned = [user.to_json(False) for user in users]
+    return jsoned
+
+@app.route("/curator_rooms/<id>")
+@cross_origin()
+def get_rooms(id):
+    user = User.objects(uid = id).first()
+    rooms = [room.to_json() for room in user.rooms] 
+    return rooms
+
 
 @app.route("/add")
 @cross_origin()
@@ -170,27 +211,27 @@ def hello():
         furniture3_7 = Furniture(type= "bathroom", type_expanded = "wc", questions = "Огляньте туалет, йоршик, та паперотримач. ", priority = 22)
         furniture3_7.save()
 
-        room1 = Room(names=["", "", ""], number = number_room, furniture_list = [[furniture1_1, furniture1_2,furniture1_3, furniture1_4, furniture1_5], [furniture2_1_1,furniture2_1_2,furniture2_1_3, furniture2_3, furniture2_4, furniture2_5, furniture2_6, furniture2_7, furniture2_8, furniture2_9, furniture2_10], [furniture3_1, furniture3_2, furniture3_3, furniture3_4, furniture3_5, furniture3_6, furniture3_7]])
+        room1 = Room(verified = False, names=["", "", ""], number = number_room, furniture_list = [[furniture1_1, furniture1_2,furniture1_3, furniture1_4, furniture1_5], [furniture2_1_1,furniture2_1_2,furniture2_1_3, furniture2_3, furniture2_4, furniture2_5, furniture2_6, furniture2_7, furniture2_8, furniture2_9, furniture2_10], [furniture3_1, furniture3_2, furniture3_3, furniture3_4, furniture3_5, furniture3_6, furniture3_7]])
         room1.save()
 
     return "rooms created"
 
 
 
-@app.route("/rooms")
-@cross_origin()
-def rooms():
-    posted_data = request.form
-    user = User.objects(id = "63f5f662a1a1ad28c507fef0").first()
-    print(user.to_json())
-    return dict(user.to_json())
+# @app.route("/rooms")
+# @cross_origin()
+# def rooms():
+#     posted_data = request.form
+#     user = User.objects(id = "63f5f662a1a1ad28c507fef0").first()
+#     print(user.to_json())
+#     return dict(user.to_json())
 
 
 
 @app.route("/room/<encoded>/submit", methods = ["POST"])
 @cross_origin()
 def add_room_info(encoded):
-    print(encoded)
+
     data = request.data.decode("utf-8")
     json4ik = json.loads(data, strict=False)
     room_id = f.decrypt(encoded).decode()
@@ -199,6 +240,25 @@ def add_room_info(encoded):
     room.save()
     return "add"
 
+@app.route("/verify", methods = ["POST"])
+@cross_origin()
+def verify():
+    data = json.loads(request.data.decode("utf-8"))
+    user_id = data["u_id"]
+    user = User.objects(uid = user_id).first()
+    print(data)
+    if user.user_type == "USER" or user.user_type == "ADMIN":
+        print(data, "+++")
+        room_number = data["room_n"]
+        for room in user.rooms:
+            if room.number == room_number:
+                room = Room.objects(number = room_number).first()
+                room.verify()
+                room.save()
+                return "Verified"
+        return "Not room"
+    return "Not allowed"
+    # room_id = f.decrypt(data.room_id).decode()
 
 
 @app.route("/furniture")
@@ -213,7 +273,9 @@ def furniture():
 def room_form(encoded):
     room_id = f.decrypt(encoded).decode()
     room = Room.objects(id = room_id).first()
-    return room.to_json()
+    if room.verified == False:
+        return room.to_json()
+    return {}
 
 # Starting app
 if __name__=="main":
