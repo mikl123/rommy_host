@@ -19,6 +19,7 @@ function Form_reg(props) {
     const [step, setStep] = useState(1)
     const [stepfur, setStepfur] = useState(0)
     const [error, setError] = useState("")
+    const [errorFurniture, setErrorFurniture] = useState("")
     let navigate = useNavigate();
     const routeChange = (path) => {
         navigate(path);
@@ -70,14 +71,14 @@ function Form_reg(props) {
         setStep(prev => prev + 1)
     }
     function checkFurniture_inp() {
-        for (const [index, furniture] of room.furniture_list.entries()) {
-            if (furniture.description === "") {
-                setError("Опишіть " + furniture.type_expanded)
-                return;
-            } else {
+        for(let elem of room.furniture_list[stepfur]){
+            if (elem.description===null | elem.description===""){
+                setErrorFurniture("Немає опису об'єкту '"+elem.type_expanded+"' не заповнено.")
+                console.log(errorFurniture)
+                return(false)
             }
         }
-        setStep(prev => prev + 1)
+        return(true)
     }
     const handle_post = async (e) => {
         e.preventDefault();
@@ -135,6 +136,9 @@ function Form_reg(props) {
                                                 case index_block:
                                                     return (<>
                                                         <div className='furniture_list' key="furniture_div">
+                                                            {errorFurniture?<>
+                                                            <div className="error_block">{errorFurniture}</div>
+                                                            </>:<></>}
                                                             {block.map((ele, index) => (<>
                                                                 <div key={"div_" + index + "" + index_block} className='furniture_block'>
                                                                     <div key={"div_header_" + index + "" + index_block} className="header_furniture">
@@ -173,11 +177,15 @@ function Form_reg(props) {
 
                                                             </>))}
                                                             <button className="button_next" key="button_room" onClick={(e) => {
+                                                                e.preventDefault()
+                                                                if (checkFurniture_inp()){
                                                                 if (stepfur + 1 >= room.furniture_list.length) {
                                                                     setStep((prev) => prev + 1)
                                                                 } else {
                                                                     setStepfur((prev) => prev + 1)
                                                                 }
+                                                            }
+                                                            window.scrollTo(0, 0);
                                                             }}>Далі</button>
                                                         </div>
                                                     </>)

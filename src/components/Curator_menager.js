@@ -23,20 +23,18 @@ const Curator_menager = () => {
     const [wing, setWing] = useState("")
     const [login_new, setLogin_new] = useState([])
     const [password_new, setPassword_new] = useState([])
-    const [rooms, setRooms] = useState([])
     const { signup } = useAuth()
     const options = [
-        { label: "201-218", value: '2 floor left'},
-        { label: "219-234", value: '2 floor right' },
-        { label: "301-318", value: '3 floor left' },
-        { label: "319-334", value: '3 floor right' },
-        { label: "401-418", value: '4 floor left' },
-        { label: "419-434", value: '4 floor right' },
-        { label: "501-518", value: '5 floor left'},
-        { label: "519-534", value: '5 floor right' },
-      ];
+        { value: "201-218", label: "201-218" },
+        { value: "219-234", label: "219-234" },
+        { value: "301-318", label: "301-318" },
+        { value: "319-334", label: "319-334" },
+        { value: "401-418", label: "401-418" },
+        { value: "419-434", label: "419-434" },
+        { value: "501-518", label: "501-518" },
+        { value: "519-534", label: "519-534" },
+    ];
     const [selected, setSelected] = useState([]);
-    
     useEffect(() => {
         setLoading(true)
         axios.get(`http://localhost:5000/curators`)
@@ -58,10 +56,12 @@ const Curator_menager = () => {
             setError("New password is empty")
             return
         }
-        console.log("adsasd")
+        let rooms =""
+        for (let elem of selected){
+            rooms+=elem.value+","
+        }
         signup(login_new, password_new, role_new, rooms)
     }
-
     return (
         <div>
             <div className="header">
@@ -74,35 +74,35 @@ const Curator_menager = () => {
                 </div>
             </div>
             <div className='add_curator_div'>
-            <button className = 'button_add_curator' onClick={() => setCreate_new(true)}>+</button>
-            <label className='add_curator'>Додати куратора</label>
+                <button className='button_add_curator' onClick={() => setCreate_new(true)}>+</button>
+                <label className='add_curator'>Додати куратора</label>
             </div>
             {create_new ? <>
                 {error ? <>
                     <div>{error}</div>
                 </> : <></>}
-                <form className = 'form_add_curator' onSubmit={(e) => create_new_user(e)}>
+                <form className='form_add_curator' onSubmit={(e) => create_new_user(e)}>
                     <div>
                         <label>Корпоративна пошта куратора</label>
                         <p><input classname="info_curator" type="text" value={login_new} onChange={(e) => setLogin_new(e.target.value)} /></p>
                     </div>
-                    <div> 
+                    <div>
                         <label>Пароль</label>
                         <p><input classname="info_curator" type="password" value={password_new} onChange={(e) => setPassword_new(e.target.value)} /></p></div>
                     <div>
-                    <MultiSelect className='multiselect'
-                        options={options}
-                        value={selected}
-                        onChange={setSelected}
-                    />
+                        <MultiSelect className='multiselect'
+                            options={options}
+                            value={selected}
+                            onChange={setSelected}
+                        />
                     </div>
                     <div>
                         <label>Оберіть статус</label>
                         <p><select key={"_select_"} value={role_new} className="select_owner"
-                        onChange={(e) => setRole_new(e.target.value)}>
-                        <option key={"role_1"} value={"ADMIN"}>Адмін</option>
-                        <option key={"role_2"} value={"USER"}>Куратор</option>
-                    </select></p>
+                            onChange={(e) => setRole_new(e.target.value)}>
+                            <option key={"role_1"} value={"ADMIN"}>Адмін</option>
+                            <option key={"role_2"} value={"USER"}>Куратор</option>
+                        </select></p>
                     </div>
                     <div><input className='submit_curator' type="submit" value={"Створити куратора"} /></div>
                 </form>
