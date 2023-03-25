@@ -1,6 +1,11 @@
-# Getting Started with Create React App
+# Roomy
+Користувачі: студенти, куратори, адміністратори колегіуму.
+Мета: 
+<ol>
+  <li>Студентам: полегшити процес заповнення форми про пошкодження в колегіумі, зробити її в електронному вигляді.</li>
+  <li>Кураторам: надати можливість підтверджувати форми і переглядати у будь-який час.</li>
+  <li>Адміністраторам: надати </li>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
