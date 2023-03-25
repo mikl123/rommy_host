@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { object } from 'prop-types';
 import "../styles/Curator.css"
+import "../styles/Form.css"
 import { useAuth } from "../contexts/AuthContexts"
 const Rooms = (props) => {
   const { currentUser } = useAuth()
@@ -16,7 +17,7 @@ const Rooms = (props) => {
     navigate(path);
   }
   const verify = (room_number, user_id) => {
-    axios.post(`http://localhost:5000/verify`, { room_n: room_number, u_id: user_id})
+    axios.post(http://localhost:5000/verify, { room_n: room_number, u_id: user_id})
       .then(res => {
         let new_rooms = []
         for (let room of response) {
@@ -35,7 +36,7 @@ const Rooms = (props) => {
 }
 useEffect(() => {
   setLoading(true)
-  axios.get(`http://localhost:5000/curator_rooms/${props.user_id}`)
+  axios.get(http://localhost:5000/curator_rooms/${props.user_id})
     .then(res => {
       console.log(res)
       setResponse(res.data)
@@ -65,36 +66,36 @@ return (
           ))}
         </div></>}
     </> : <>
-      <div>
-        <div>
-          Імя жильців
+      <div className='main'>
+        {response.map((ele, index) => (
+        <div className='info'><strong>Інформація про кімнату {ele.number}</strong></div>))}
+        <div className='name'>
+          <strong>Ім'я жильців:</strong>
           {currentRoom.names.map((name, index) => (
             <div key={name + index}>{name}</div>
           ))}
         </div>
-        <div>
+        <div className='name'>
           {currentRoom.furniture_list.map((list_fur, index_fur) => (
             <>
               {list_fur.map((furniture, index) => (
                 <div key={"furniture_div" + index + index_fur}>
-                  <div>{furniture.type_expanded}</div>
-                  Повідомлено про
+                  <div><strong>{furniture.type_expanded}</strong></div>
+                  Опис:
                   <div>{furniture.description + "asdasdasd"}</div>
                   {furniture.owner ? <>
                     <div>{furniture.owner + "owner"}</div>
                   </> : <></>}
-                  {furniture.images.length ? <>
-                    asda!!!!!!!!!!!!
-                    {furniture.images}
-                  </> : <></>}
-                  <img src={furniture.images} />
+                  <>{furniture.images.length ? <img className='image' src={furniture.images}/> : <label>Немає інформації</label>}</>
                 </div>
               ))}
             </>
           ))}
 
         </div>
-        <button onClick={() => verify(currentRoom.number, currentUser._delegate.uid)}>Підтвердити</button>
+        <div className='verify'>
+        <button className='verify_button' onClick={() => verify(currentRoom.number, currentUser._delegate.uid)}>Підтвердити</button>
+        </div>
       </div>
     </>}
 
