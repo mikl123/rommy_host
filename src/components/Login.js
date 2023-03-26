@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import  { MapComponent } from './Map.js';
 
 export default function Login() {
+    const { role } = useAuth()
     let navigate1 = useNavigate(); 
     const routeChange = (path) =>{ 
       navigate1(path);
@@ -30,7 +31,15 @@ export default function Login() {
             setError('')
             setLoading(true)
             await login(emailRef.current.value, passwordRef.current.value)
+            console.log(role)
+            console.log("kmsndfjksndfkjsdfshdfjsdbfhbfhsbf")
+
+            // if (role == "ADMIN") {
+            //     navigate("/manager")
+            // }
+            // else {
             navigate("/rooms_curator")
+            
         } catch {
             setError('Не вдалося увійти')
         }

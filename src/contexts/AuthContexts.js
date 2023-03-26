@@ -65,7 +65,7 @@ export function AuthProvider({ children }) {
                 })
                     .then(function (response) {
                         console.log(response)
-                        setRole(response)
+                        setRole(response.data)
                     })
                     .catch(function (error) {
                         console.log(error);

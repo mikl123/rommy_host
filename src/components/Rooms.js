@@ -36,7 +36,7 @@ const Rooms = (props) => {
 }
 useEffect(() => {
   setLoading(true)
-  axios.get('http://localhost:5000/curator_rooms/${props.user_id}')
+  axios.get(`http://localhost:5000/curator_rooms/${props.user_id}`)
     .then(res => {
       console.log(res)
       setResponse(res.data)
@@ -62,13 +62,12 @@ return (
         </div>
         <div className="rooms">
           {response.map((ele, index) => (
-            <div className="header_button-room" onClick={() => setCurrentRoom(ele)}>{ele.number}{ele.verified ? "verified" : "not veryfied"}</div>
+            <div className="header_button-room" onClick={() => setCurrentRoom(ele)}>{ele.number}{ele.verified ? "✔" : "×"}</div>
           ))}
         </div></>}
     </> : <>
       <div className='main'>
-        {response.map((ele, index) => (
-        <div className='info'><strong>Інформація про кімнату {ele.number}</strong></div>))}
+        <div className='info'><strong>Інформація про кімнату {currentRoom.number}</strong></div>
         <div className='name'>
           <strong>Ім'я жильців:</strong>
           {currentRoom.names.map((name, index) => (
@@ -82,11 +81,11 @@ return (
                 <div key={"furniture_div" + index + index_fur}>
                   <div><strong>{furniture.type_expanded}</strong></div>
                   Опис:
-                  <div>{furniture.description + "asdasdasd"}</div>
+                  <div>{furniture.description}</div>
                   {furniture.owner ? <>
                     <div>{furniture.owner + "owner"}</div>
                   </> : <></>}
-                  <>{furniture.images.length ? <img className='image' src={furniture.images}/> : <label>Немає інформації</label>}</>
+                  <>{furniture.images!==null? <img className='image' src={furniture.images}/> : <label>Немає інформації</label>}</>
                 </div>
               ))}
             </>
