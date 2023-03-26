@@ -53,12 +53,12 @@ function App() {
         <Routes>
           {currentUser ? <>
             {/* {role === "ADMIN" ? <> */}
-            <Route exact path="/manager" element={<Curator_menager/>} />
+            <Route exact path="/manager" element={<Curator_menager />} />
             {/* </> : <></>} */}
-            <Route exact path="/rooms_curator" element={<Rooms user_id = {currentUser._delegate.uid} />} />
+            <Route exact path="/rooms_curator" element={<Rooms user_id={currentUser._delegate.uid} />} />
           </> :
             <></>}
-<Route exact path="/manager" element={<Curator_menager/>} />
+          <Route exact path="/manager" element={<Curator_menager />} />
           <Route exact path="/" element={<Main />} />
           <Route path="/update-profile" element={<UpdateProfile />} />
           <Route path="/signup" element={<Signup />} />

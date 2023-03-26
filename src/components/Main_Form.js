@@ -8,19 +8,26 @@ function Main_Form() {
     const { id_coded } = useParams();
     const [loading, setLoading] = useState(true)
     const [response, setResponse] = useState(null);
+    const [error, setError] = useState(null);
     useEffect(() => {
         axios.get(`http://localhost:5000/room/${id_coded}`)
             .then(res => {
                 setResponse(res.data)
                 setLoading(false)
-            }).catch(err =>
-                setLoading(false))
+                console.log(res.data)
+                console.log("asdasdasd")
+            }).catch(err => {
+                setError(err)
+                console.log(err)
+                setLoading(false)
+            }
+            )
     }, []);
     return (
         <div className='main_form'>
             {loading ? <div class="loader_block"><div class="loader"></div><p>Зачекайте</p></div> :
                 <>
-                    {(response & response !== {}) ? <>
+                    {(response) ? <>
                         <div className='reg_text_div' >Реєстрація кімнати {response.name}</div>
 
                         <div className='reg_text_div' >Ви реєструєте кімнату №{response.number}</div>
@@ -30,14 +37,14 @@ function Main_Form() {
                             <strong><p>Вітаємо вдома!</p></strong>
                             <MapComponent />
                         </div>
-                    </> : <>
-                        {JSON.stringify(response) === "{}" ? <>
-                            <div>Куратор вже затвердив вашу форму</div>
-                        </> : <>
-                            <h1>Виникла помилка</h1>
-                        </>}
-
-                    </>}
+                    </> : <></>}
+                    {error ? <>
+                        {error.response.data === "Wrong code" ? <div>
+                            Ваш код не правильний
+                        </div> : <div>
+                            Ваша форма вже підтвердженна куратором ви не можете робити змінни
+                        </div>}
+                    </> : <></>}
                 </>}
 
         </div>

@@ -17,7 +17,7 @@ const Rooms = (props) => {
     navigate(path);
   }
   const verify = (room_number, user_id) => {
-    axios.post(http://localhost:5000/verify, { room_n: room_number, u_id: user_id})
+    axios.post("http://localhost:5000/verify", { room_n: room_number, u_id: user_id})
       .then(res => {
         let new_rooms = []
         for (let room of response) {
@@ -30,13 +30,10 @@ const Rooms = (props) => {
         setResponse(new_rooms)
       }).catch(err =>
         setLoading(false))
-  
-
- 
 }
 useEffect(() => {
   setLoading(true)
-  axios.get(http://localhost:5000/curator_rooms/${props.user_id})
+  axios.get(`http://localhost:5000/curator_rooms/${props.user_id}`)
     .then(res => {
       console.log(res)
       setResponse(res.data)

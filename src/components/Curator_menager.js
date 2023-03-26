@@ -100,6 +100,7 @@ const Curator_menager = () => {
                         <label>Оберіть статус</label>
                         <p><select key={"_select_"} value={role_new} className="select_owner"
                         onChange={(e) => setRole_new(e.target.value)}>
+                        <option disabled selected value> -- виберіть власника -- </option>
                         <option key={"role_1"} value={"ADMIN"}>Адмін</option>
                         <option key={"role_2"} value={"USER"}>Куратор</option>
                     </select></p>
