@@ -17,7 +17,7 @@ function Main_Page() {
                 <div className="logo">RooMy</div>
                 <div className="button_group">
                     <button onClick={() => routeChange("login")} className="header_button-login">Увійти</button>
-                    {role != "ADMIN" ? <>
+                    {role == "ADMIN" ? <>
                         <button onClick={() => routeChange("signup")} className="header_button-login">Зареєструвати</button>
                     </> : <></>}
                 </div>

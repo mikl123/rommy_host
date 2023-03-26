@@ -30,7 +30,7 @@ export default function Login() {
             setError('')
             setLoading(true)
             await login(emailRef.current.value, passwordRef.current.value)
-            navigate("/curator")
+            navigate("/rooms_curator")
         } catch {
             setError('Не вдалося увійти')
         }
