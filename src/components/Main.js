@@ -5,7 +5,6 @@ import { Container } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContexts"
 import Map from "../components/Map"
 function Main_Page() {
-    const { role } = useAuth()
     let navigate = useNavigate();
     const routeChange = (path) => {
         navigate(path);
@@ -17,9 +16,6 @@ function Main_Page() {
                 <div className="logo">RooMy</div>
                 <div className="button_group">
                     <button onClick={() => routeChange("login")} className="header_button-login">Увійти</button>
-                    {role == "ADMIN" ? <>
-                        <button onClick={() => routeChange("signup")} className="header_button-login">Зареєструвати</button>
-                    </> : <></>}
                 </div>
             </div>
             <div>

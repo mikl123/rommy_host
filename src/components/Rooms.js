@@ -2,11 +2,11 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-import { object } from 'prop-types';
 import "../styles/Curator.css"
 import "../styles/Form.css"
 import { useAuth } from "../contexts/AuthContexts"
 const Rooms = (props) => {
+  const { role } = useAuth()
   const { currentUser } = useAuth()
   const [loading, setLoading] = useState(false)
   const [response, setResponse] = useState([])
@@ -49,12 +49,15 @@ return (
     style={{ minHeight: '100vh' }}>
     {currentRoom === null ? <>
       {loading ? <>
-        Loading please wait
+        Зачекайте...
 
       </> : <><div className="header">
         <div className="logo">RooMy</div>
         <div className="button_group">
-          <button onClick={() => routeChange("/")} className="header_button-home">Головна</button>
+          <button onClick={() => routeChange("/")} className="header_button-home">Вийти</button>
+          {role == "ADMIN" ? <>
+                <button onClick={() => routeChange("/manager")} className="header_button-login">Зареєструвати</button>
+          </> : <></>}
         </div>
       </div>
         <div className="main-text">
@@ -69,7 +72,7 @@ return (
       <div className='main'>
         <div className='info'><strong>Інформація про кімнату {currentRoom.number}</strong></div>
         <div className='name'>
-          <strong>Ім'я жильців:</strong>
+          <strong>Ім'я мешканців:</strong>
           {currentRoom.names.map((name, index) => (
             <div key={name + index}>{name}</div>
           ))}

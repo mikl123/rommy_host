@@ -7,6 +7,7 @@ import Select from 'react-select'
 import { MultiSelect } from "react-multi-select-component"
 import '../styles/Manager.css'
 import '../styles/Main.css'
+import Map from "../components/Map"
 
 const Curator_menager = () => {
     const { role } = useAuth()
@@ -67,7 +68,8 @@ const Curator_menager = () => {
             <div className="header">
                 <div className="logo">RooMy</div>
                 <div className="button_group">
-                    <button onClick={() => routeChange("login")} className="header_button-login">Увійти</button>
+                    <button onClick={() => routeChange("/")} className="header_button-home">Вийти</button>
+                    <button onClick={() => routeChange("login")} className="header_button-login">Куратор</button>
                     {role != "ADMIN" ? <>
                         <button onClick={() => routeChange("signup")} className="header_button-login">Зареєструвати</button>
                     </> : <></>}
@@ -115,10 +117,14 @@ const Curator_menager = () => {
                 <>
                     {response.map((ele, index) => (
                         <div>
-                            <div>{ele.email}   {"  " + ele.rooms}</div>
+                            <div><strong>{ele.email}</strong>   {"  " + ele.rooms[0] + "-" + ele.rooms[ele.rooms.length - 1]}</div>
                         </div>
                     ))}
                 </>}
+            </div>
+            <div className="greeting">
+                <strong><p>Вітаємо вдома!</p></strong>
+                <Map />
             </div>
         </div>
     )
