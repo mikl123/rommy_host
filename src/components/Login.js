@@ -33,11 +33,6 @@ export default function Login() {
             await login(emailRef.current.value, passwordRef.current.value)
             console.log(role)
             console.log("kmsndfjksndfkjsdfshdfjsdbfhbfhsbf")
-
-            // if (role == "ADMIN") {
-            //     navigate("/manager")
-            // }
-            // else {
             navigate("/rooms_curator")
             
         } catch {

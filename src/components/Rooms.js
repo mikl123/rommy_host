@@ -6,6 +6,7 @@ import "../styles/Curator.css"
 import "../styles/Form.css"
 import { useAuth } from "../contexts/AuthContexts"
 const Rooms = (props) => {
+  const refresh = () => window.location.reload(true)
   const { role } = useAuth()
   const { currentUser } = useAuth()
   const [loading, setLoading] = useState(false)
@@ -49,7 +50,7 @@ return (
     style={{ minHeight: '100vh' }}>
     {currentRoom === null ? <>
       {loading ? <>
-        Зачекайте...
+        <text styles={{}}>Зачекайте...</text>
 
       </> : <><div className="header">
         <div className="logo">RooMy</div>
@@ -97,6 +98,7 @@ return (
         </div>
         <div className='verify'>
         <button className='verify_button' onClick={() => verify(currentRoom.number, currentUser._delegate.uid)}>Підтвердити</button>
+        <button className='verify_button' onClick={refresh}>Назад</button>
         </div>
       </div>
     </>}

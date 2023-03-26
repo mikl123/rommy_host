@@ -120,6 +120,7 @@ const Curator_menager = () => {
                             <div><strong>{ele.email}</strong>   {"  " + ele.rooms[0] + "-" + ele.rooms[ele.rooms.length - 1]}</div>
                         </div>
                     ))}
+                    <button className='verify_button' onClick={() => routeChange("/rooms_curator")}>Назад</button>
                 </>}
             </div>
             <div className="greeting">

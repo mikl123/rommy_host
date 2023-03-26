@@ -32,6 +32,7 @@ body > .container {
     background-color: #FAECE1;
 }
 .button_group{
+    font-family: 'Montserrat', sans-serif;
     grid-area: "group";
     display: grid;
     grid-template-areas: 'button1 button2 button3';
