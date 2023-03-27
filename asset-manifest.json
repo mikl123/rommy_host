@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/roomy/static/css/main.d1d9c7e8.css",
-    "main.js": "/roomy/static/js/main.f2dcf87e.js",
+    "main.js": "/roomy/static/js/main.0ed51626.js",
     "static/media/collegium.png": "/roomy/static/media/collegium.dd338ed7353fcc716188.png",
     "static/media/icon2.png": "/roomy/static/media/icon2.9561bc1b04de104f4a53.png",
     "index.html": "/roomy/index.html",
     "main.d1d9c7e8.css.map": "/roomy/static/css/main.d1d9c7e8.css.map",
-    "main.f2dcf87e.js.map": "/roomy/static/js/main.f2dcf87e.js.map"
+    "main.0ed51626.js.map": "/roomy/static/js/main.0ed51626.js.map"
   },
   "entrypoints": [
     "static/css/main.d1d9c7e8.css",
-    "static/js/main.f2dcf87e.js"
+    "static/js/main.0ed51626.js"
   ]
 }
