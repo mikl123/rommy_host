@@ -55,26 +55,26 @@ export function AuthProvider({ children }) {
     function updatePassword(password) {
         return currentUser.updatePassword(password)
     }
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => {
-            setCurrentUser(user)
-            if (user) {
-                console.log()
-                axios.post('http://localhost:5000/login', {
-                    uid: user._delegate.uid
-                })
-                    .then(function (response) {
-                        console.log(response)
-                        setRole(response.data)
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            }
-            setLoading(false)
-        })
-        return unsubscribe
-    }, [])
+    // useEffect(() => {
+    //     const unsubscribe = auth.onAuthStateChanged(user => {
+    //         setCurrentUser(user)
+    //         if (user) {
+    //             console.log()
+    //             axios.post('http://localhost:5000/login', {
+    //                 uid: user._delegate.uid
+    //             })
+    //                 .then(function (response) {
+    //                     console.log(response)
+    //                     setRole(response.data)
+    //                 })
+    //                 .catch(function (error) {
+    //                     console.log(error);
+    //                 });
+    //         }
+    //         setLoading(false)
+    //     })
+    //     return unsubscribe
+    // }, [])
     const value = {
         currentUser, role,
         signup,

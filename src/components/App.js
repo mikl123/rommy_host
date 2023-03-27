@@ -52,9 +52,9 @@ function App() {
       <div className='w-100 h-100 outer'>
         <Routes>
           {currentUser ? <>
-            {/* {role === "ADMIN" ? <> */}
+            {role === "ADMIN" ? <>
             <Route exact path="/manager" element={<Curator_menager/>} />
-            {/* </> : <></>} */}
+            </> : <></>} 
             <Route exact path="/rooms_curator" element={<Rooms user_id = {currentUser._delegate.uid} />} />
           </> :
             <></>}
