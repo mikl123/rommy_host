@@ -8,7 +8,7 @@ body > .container {
     padding: 60px 15px 100px;
     
 }
-.main{
+.main_form{
     background-color: #c8b8ad;
 }
 .loader {
@@ -57,28 +57,7 @@ body > .container {
     grid-template-areas: 'button1 button2 button3';
     margin-right: 30px;
 }
-.header_button-home{
-    font-size: 12px;
-    border: none;
-    background-color: #542400;
-    color: rgb(255, 255, 255);
-    border-radius: 5px;
-    padding: 15px 15px;
-    cursor: pointer;
-    transition: all 0.3s;
-    margin: 15px;
-}
-.main-text{
-    color: #542400;
-    margin: 30px;
-    font-size: 175%;
-    padding: 15px 10px 20px 7px;
-    text-align: center;
-}
-.rooms{
-    font-size: 125%;
-    padding: 0px 10px 20px 7px;
-}
+
 .header_button-room{
     grid-area: "button419";
     font-size: 18px;
@@ -91,4 +70,16 @@ body > .container {
     cursor: pointer;
     transition: all 0.3s;
     margin: 15px;
+}
+.main-text{
+    color: #542400;
+    margin: 30px;
+    font-size: 175%;
+    padding: 15px 10px 20px 7px;
+    text-align: center;
+    background-color: #c8b8ad;
+}
+.rooms{
+    font-size: 125%;
+    padding: 0px 10px 20px 7px;
 }

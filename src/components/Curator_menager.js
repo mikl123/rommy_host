@@ -8,6 +8,7 @@ import { MultiSelect } from "react-multi-select-component"
 import '../styles/Manager.css'
 import '../styles/Main.css'
 import Map from "../components/Map"
+import NavBar from './NavBar';
 
 const Curator_menager = () => {
     const { role } = useAuth()
@@ -65,18 +66,9 @@ const Curator_menager = () => {
     }
     return (
         <div>
-            <div className="header">
-                <div className="logo">RooMy</div>
-                <div className="button_group">
-                    <button onClick={() => routeChange("/")} className="header_button-home">Вийти</button>
-                    <button onClick={() => routeChange("login")} className="header_button-login">Куратор</button>
-                    {role != "ADMIN" ? <>
-                        <button onClick={() => routeChange("signup")} className="header_button-login">Зареєструвати</button>
-                    </> : <></>}
-                </div>
-            </div>
+            <NavBar />
             <div className='add_curator_div'>
-                <button className='button_add_curator' onClick={() => setCreate_new(true)}>+</button>
+                <button className='button_add_curator' onClick={() => setCreate_new((prev)=>!prev)}>{create_new?"-":"+"}</button>
                 <label className='add_curator'>Додати куратора</label>
             </div>
             {create_new ? <>
@@ -120,7 +112,6 @@ const Curator_menager = () => {
                             <div><strong>{ele.email}</strong>   {"  " + ele.rooms[0] + "-" + ele.rooms[ele.rooms.length - 1]}</div>
                         </div>
                     ))}
-                    <button className='verify_button' onClick={() => routeChange("/rooms_curator")}>Назад</button>
                 </>}
             </div>
             <div className="greeting">

@@ -40,6 +40,7 @@ body > .container {
     display: grid;
     grid-template-areas: 'button1 button2 button3';
     margin-right: 30px;
+    align-items: center;
 }
 .logo{
     grid-area: "logo";
@@ -60,19 +61,7 @@ body > .container {
     padding: 15px 15px;
     cursor: pointer;
     transition: all 0.3s;
-    margin: 15px;
-}
-.header_button-signup{
-    grid-area: "button2";
-    font-size: 12px;
-    border: none;
-    background-color: #542400;
-    color: rgb(255, 255, 255);
-    border-radius: 5px;
-    padding: 15px 15px;
-    cursor: pointer;
-    transition: all 0.3s;
-    margin: 15px;
+    margin-left: 10px;
 }
 .header_button-home{
     grid-area: "button3";
@@ -86,10 +75,6 @@ body > .container {
     transition: all 0.3s;
     margin: 15px;
 }
-.header_button-signup:hover{
-    background-color: #896347;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
- }
 .header_button-login:hover{
     background-color: #896347;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;

@@ -3,6 +3,7 @@ import { Form, Button, Card, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContexts";
 import { Link, useNavigate } from "react-router-dom";
 import  { MapComponent } from './Map.js';
+import NavBar from "./NavBar";
 
 export default function Login() {
     const { role } = useAuth()
@@ -33,7 +34,7 @@ export default function Login() {
             await login(emailRef.current.value, passwordRef.current.value)
             console.log(role)
             console.log("kmsndfjksndfkjsdfshdfjsdbfhbfhsbf")
-            navigate("/rooms_curator")
+            navigate("/")
             
         } catch {
             setError('Не вдалося увійти')
@@ -43,12 +44,7 @@ export default function Login() {
 
     return(
         <div>
-            <div className="header">
-                <div className="logo">RooMy</div>
-                <div className="button_group">
-                    <button onClick={()=>routeChange("/")} className="header_button-login">Головна</button>
-                </div>
-            </div>
+            <NavBar/>
             <div className="image">
                 {/* <img src={logo}></img> */}
             </div>
