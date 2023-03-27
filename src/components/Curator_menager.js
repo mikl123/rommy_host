@@ -7,6 +7,7 @@ import Select from 'react-select'
 import { MultiSelect } from "react-multi-select-component"
 import '../styles/Manager.css'
 import '../styles/Main.css'
+import Map from "../components/Map"
 
 const Curator_menager = () => {
     const { role } = useAuth()
@@ -23,20 +24,18 @@ const Curator_menager = () => {
     const [wing, setWing] = useState("")
     const [login_new, setLogin_new] = useState([])
     const [password_new, setPassword_new] = useState([])
-    const [rooms, setRooms] = useState([])
     const { signup } = useAuth()
     const options = [
-        { label: "201-218", value: '2 floor left'},
-        { label: "219-234", value: '2 floor right' },
-        { label: "301-318", value: '3 floor left' },
-        { label: "319-334", value: '3 floor right' },
-        { label: "401-418", value: '4 floor left' },
-        { label: "419-434", value: '4 floor right' },
-        { label: "501-518", value: '5 floor left'},
-        { label: "519-534", value: '5 floor right' },
-      ];
+        { value: "201-218", label: "201-218" },
+        { value: "219-234", label: "219-234" },
+        { value: "301-318", label: "301-318" },
+        { value: "319-334", label: "319-334" },
+        { value: "401-418", label: "401-418" },
+        { value: "419-434", label: "419-434" },
+        { value: "501-518", label: "501-518" },
+        { value: "519-534", label: "519-534" },
+    ];
     const [selected, setSelected] = useState([]);
-    
     useEffect(() => {
         setLoading(true)
         axios.get(`http://localhost:5000/curators`)
@@ -58,52 +57,54 @@ const Curator_menager = () => {
             setError("New password is empty")
             return
         }
-        console.log("adsasd")
+        let rooms =""
+        for (let elem of selected){
+            rooms+=elem.value+","
+        }
         signup(login_new, password_new, role_new, rooms)
     }
-
     return (
         <div>
             <div className="header">
                 <div className="logo">RooMy</div>
                 <div className="button_group">
-                    <button onClick={() => routeChange("login")} className="header_button-login">Увійти</button>
+                    <button onClick={() => routeChange("/")} className="header_button-home">Вийти</button>
+                    <button onClick={() => routeChange("login")} className="header_button-login">Куратор</button>
                     {role != "ADMIN" ? <>
                         <button onClick={() => routeChange("signup")} className="header_button-login">Зареєструвати</button>
                     </> : <></>}
                 </div>
             </div>
             <div className='add_curator_div'>
-            <button className = 'button_add_curator' onClick={() => setCreate_new(true)}>+</button>
-            <label className='add_curator'>Додати куратора</label>
+                <button className='button_add_curator' onClick={() => setCreate_new(true)}>+</button>
+                <label className='add_curator'>Додати куратора</label>
             </div>
             {create_new ? <>
                 {error ? <>
                     <div>{error}</div>
                 </> : <></>}
-                <form className = 'form_add_curator' onSubmit={(e) => create_new_user(e)}>
+                <form className='form_add_curator' onSubmit={(e) => create_new_user(e)}>
                     <div>
                         <label>Корпоративна пошта куратора</label>
                         <p><input classname="info_curator" type="text" value={login_new} onChange={(e) => setLogin_new(e.target.value)} /></p>
                     </div>
-                    <div> 
+                    <div>
                         <label>Пароль</label>
                         <p><input classname="info_curator" type="password" value={password_new} onChange={(e) => setPassword_new(e.target.value)} /></p></div>
                     <div>
-                    <MultiSelect className='multiselect'
-                        options={options}
-                        value={selected}
-                        onChange={setSelected}
-                    />
+                        <MultiSelect className='multiselect'
+                            options={options}
+                            value={selected}
+                            onChange={setSelected}
+                        />
                     </div>
                     <div>
                         <label>Оберіть статус</label>
                         <p><select key={"_select_"} value={role_new} className="select_owner"
-                        onChange={(e) => setRole_new(e.target.value)}>
-                        <option disabled selected value> -- виберіть власника -- </option>
-                        <option key={"role_1"} value={"ADMIN"}>Адмін</option>
-                        <option key={"role_2"} value={"USER"}>Куратор</option>
-                    </select></p>
+                            onChange={(e) => setRole_new(e.target.value)}>
+                            <option key={"role_1"} value={"ADMIN"}>Адмін</option>
+                            <option key={"role_2"} value={"USER"}>Куратор</option>
+                        </select></p>
                     </div>
                     <div><input className='submit_curator' type="submit" value={"Створити куратора"} /></div>
                 </form>
@@ -116,10 +117,15 @@ const Curator_menager = () => {
                 <>
                     {response.map((ele, index) => (
                         <div>
-                            <div>{ele.email}   {"  " + ele.rooms}</div>
+                            <div><strong>{ele.email}</strong>   {"  " + ele.rooms[0] + "-" + ele.rooms[ele.rooms.length - 1]}</div>
                         </div>
                     ))}
+                    <button className='verify_button' onClick={() => routeChange("/rooms_curator")}>Назад</button>
                 </>}
+            </div>
+            <div className="greeting">
+                <strong><p>Вітаємо вдома!</p></strong>
+                <Map />
             </div>
         </div>
     )

@@ -2,11 +2,12 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-import { object } from 'prop-types';
 import "../styles/Curator.css"
 import "../styles/Form.css"
 import { useAuth } from "../contexts/AuthContexts"
 const Rooms = (props) => {
+  const refresh = () => window.location.reload(true)
+  const { role } = useAuth()
   const { currentUser } = useAuth()
   const [loading, setLoading] = useState(false)
   const [response, setResponse] = useState([])
@@ -16,20 +17,19 @@ const Rooms = (props) => {
   const routeChange = (path) => {
     navigate(path);
   }
-  const verify = (room_number, user_id) => {
-    axios.post("http://localhost:5000/verify", { room_n: room_number, u_id: user_id})
-      .then(res => {
-        let new_rooms = []
-        for (let room of response) {
-          let new_room = room
-          if (room.number === room_number) {
-            new_room.verified = true
-          }
-          new_rooms.append(new_room)
-        }
-        setResponse(new_rooms)
-      }).catch(err =>
-        setLoading(false))
+  const verify = (e,room_number, user_id) => {
+    e.preventDefault()
+    let new_rooms = []
+    for (let room of response) {
+      console.log("Cycle")
+      let new_room = room
+      if (room.number === room_number) {
+        new_room.verified = true
+      }
+      new_rooms.push(new_room)
+    }
+    setResponse(new_rooms)
+    axios.post('http://localhost:5000/verify', { room_n: room_number, u_id: user_id})
 }
 useEffect(() => {
   setLoading(true)
@@ -46,12 +46,15 @@ return (
     style={{ minHeight: '100vh' }}>
     {currentRoom === null ? <>
       {loading ? <>
-        Loading please wait
+        <text styles={{}}><span class="loader"></span></text>
 
       </> : <><div className="header">
         <div className="logo">RooMy</div>
         <div className="button_group">
-          <button onClick={() => routeChange("/")} className="header_button-home">Головна</button>
+          <button onClick={() => routeChange("/")} className="header_button-home">Вийти</button>
+          {role == "ADMIN" ? <>
+                <button onClick={() => routeChange("/manager")} className="header_button-login">Зареєструвати</button>
+          </> : <></>}
         </div>
       </div>
         <div className="main-text">
@@ -59,15 +62,14 @@ return (
         </div>
         <div className="rooms">
           {response.map((ele, index) => (
-            <div className="header_button-room" onClick={() => setCurrentRoom(ele)}>{ele.number}{ele.verified ? "verified" : "not veryfied"}</div>
+            <div className="header_button-room" onClick={() => setCurrentRoom(ele)}>{ele.number}{ele.verified ? "✔️" : "❌"}</div>
           ))}
         </div></>}
     </> : <>
       <div className='main'>
-        {response.map((ele, index) => (
-        <div className='info'><strong>Інформація про кімнату {ele.number}</strong></div>))}
+        <div className='info'><strong>Інформація про кімнату {currentRoom.number}</strong></div>
         <div className='name'>
-          <strong>Ім'я жильців:</strong>
+          <strong>Ім'я мешканців:</strong>
           {currentRoom.names.map((name, index) => (
             <div key={name + index}>{name}</div>
           ))}
@@ -79,11 +81,11 @@ return (
                 <div key={"furniture_div" + index + index_fur}>
                   <div><strong>{furniture.type_expanded}</strong></div>
                   Опис:
-                  <div>{furniture.description + "asdasdasd"}</div>
+                  <div>{furniture.description}</div>
                   {furniture.owner ? <>
                     <div>{furniture.owner + "owner"}</div>
                   </> : <></>}
-                  <>{furniture.images.length ? <img className='image' src={furniture.images}/> : <label>Немає інформації</label>}</>
+                  <>{furniture.images!==null? <img className='image' src={furniture.images}/> : <label>Немає інформації</label>}</>
                 </div>
               ))}
             </>
@@ -91,7 +93,8 @@ return (
 
         </div>
         <div className='verify'>
-        <button className='verify_button' onClick={() => verify(currentRoom.number, currentUser._delegate.uid)}>Підтвердити</button>
+        <button disabled={currentRoom.verified} className='verify_button' onClick={(e) => verify(e,currentRoom.number, currentUser._delegate.uid)}>Підтвердити</button>
+        <button className='verify_button' onClick={()=>setCurrentRoom(null)}>Назад</button>
         </div>
       </div>
     </>}

@@ -18,6 +18,11 @@
     text-align: center;
     font-size: larger;
 }
+.notions{
+  text-align: center;
+  color: #542400;
+  font-size: larger;
+}
 .reg_text_div{
   padding: 20px 0 20px;
   font-family: 'Montserrat', sans-serif;

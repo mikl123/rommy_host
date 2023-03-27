@@ -39,9 +39,9 @@ function Main_Form() {
                         </div>
                     </> : <></>}
                     {error ? <>
-                        {error.response.data === "Wrong code" ? <div>
+                        {error.response.data === "Wrong code" ? <div className='notions'>
                             Ваш код не правильний
-                        </div> : <div>
+                        </div> : <div className='notions'>
                             Ваша форма вже підтвердженна куратором ви не можете робити змінни
                         </div>}
                     </> : <></>}

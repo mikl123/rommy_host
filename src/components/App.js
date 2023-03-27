@@ -46,7 +46,7 @@ import Curator_menager from './Curator_menager';
 
 function App() {
   const { currentUser, role } = useAuth()
-  console.log(currentUser)
+  console.log(role)
   return (
     <div>
       <div className='w-100 h-100 outer'>

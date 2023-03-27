@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
             })
     }
     function signup(email, password, role,rooms) {
-        return auth.createUserWithEmailAndPassword(email, password).then((result) => {
+        return  auth.createUserWithEmailAndPassword(email, password).then((result) => {
             console.log(result)
             axios.post(`http://localhost:5000/create_user`, {
                 email: email,
@@ -59,16 +59,16 @@ export function AuthProvider({ children }) {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user)
             if (user) {
-                console.log()
                 axios.post('http://localhost:5000/login', {
                     uid: user._delegate.uid
                 })
                     .then(function (response) {
                         console.log(response)
-                        setRole(response)
+                        console.log("asdasdasd")
+                        setRole(response.data)
                     })
                     .catch(function (error) {
-                        console.log(error);
+                        console.log(error.data);
                     });
             }
             setLoading(false)

@@ -11,6 +11,10 @@ body > .container {
 .main{
     background-color: #c8b8ad;
 }
+.auth_log{
+    color: #542400;
+    margin: auto;
+}
 .header{
     align-content: center;
     align-self: center;
