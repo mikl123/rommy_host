@@ -8,9 +8,21 @@ body > .container {
     padding: 60px 15px 100px;
     
 }
-.main_form{
-    background-color: #c8b8ad;
-}
+.loader_small{
+    width:120px;
+    height:24px;
+    -webkit-mask:
+      radial-gradient(circle closest-side,#fff 94%,#0000) 0 0/25% 100%,
+      linear-gradient(#fff 0 0) center/calc(100% - 12px) calc(100% - 12px) no-repeat;
+    mask:
+      radial-gradient(circle closest-side,#fff 94%,#0000) 0 0/25% 100%,
+      linear-gradient(#fff 0 0) center/calc(100% - 12px) calc(100% - 12px) no-repeat;
+    background: linear-gradient(#FF3D00 0 0) left/0% 100% no-repeat #fff;
+    animation:bblprg 2s infinite linear;
+  }
+  @keyframes bblprg {
+      100% {background-size:100% 100%}
+  }
 .loader {
     width: 48px;
     height: 48px;
@@ -59,9 +71,8 @@ body > .container {
 }
 
 .header_button-room{
-    grid-area: "button419";
     font-size: 18px;
-    border: double #542400;
+    border: double #242220;
     padding: 0px 10px 20px 7px;
     background-color: #FAECE1;
     color: #542400;
@@ -70,6 +81,17 @@ body > .container {
     cursor: pointer;
     transition: all 0.3s;
     margin: 15px;
+    width: 100%;
+}
+.header_button-room:hover{
+    background-color: #f9e6d7;
+}
+.block_room{
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+    align-items: center;
+
 }
 .main-text{
     color: #542400;
@@ -82,4 +104,80 @@ body > .container {
 .rooms{
     font-size: 125%;
     padding: 0px 10px 20px 7px;
+}
+
+/* CSS */
+.button-8 {
+    height: 70%;
+  background-color: #e1ecf4;
+  border-radius: 3px;
+  border: 1px solid #7aa7c7;
+  box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #39739d;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.15385;
+  margin: 0;
+  outline: none;
+  padding: 8px .8em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.button-8:hover,
+.button-8:focus {
+  background-color: #b3d3ea;
+  color: #2c5777;
+}
+
+.button-8:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.button-8:active {
+  background-color: #a0c7e4;
+  box-shadow: none;
+  color: #2c5777;
+}
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+.button-8-copied{
+    height: 70%;
+    background-color: #afebad;
+    border-radius: 3px;
+    border: 1px solid #7aa7c7;
+    box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
+    box-sizing: border-box;
+    color: #000000;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system,system-ui,"Segoe UI","Liberation Sans",sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.15385;
+    margin: 0;
+    outline: none;
+    padding: 8px .8em;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    white-space: nowrap;
 }

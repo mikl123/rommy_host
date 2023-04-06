@@ -3,11 +3,12 @@ from flask_mongoengine import MongoEngine
 import json
 from flask_cors import CORS, cross_origin
 from cryptography.fernet import Fernet, InvalidToken
+# import requests
 
 key = "Z6IIrLq-hAWCNUtSIvbOfeZ9LmPKy8QNFgpPFENyJ2U="
 f = Fernet(key)
 
-a = f.encrypt(b"641c60f4f48a2ec50e91ee09")
+a = f.encrypt(b"641ed28737f82abe15c1ef83")
 print(a)
 print(f.decrypt(a).decode())
 
@@ -264,12 +265,12 @@ def verify():
     # room_id = f.decrypt(data.room_id).decode()
 
 
-@app.route("/furniture")
-@cross_origin()
-def furniture():
-    # room_id = Fernet.decrypt(encoded, key).decode()
-    room = Furniture.objects(id = "63f7d72f4cf0331b497f3e7d").first()
-    return room.to_json()
+# @app.route("/furniture")
+# @cross_origin()
+# def furniture():
+#     # room_id = Fernet.decrypt(encoded, key).decode()
+#     room = Furniture.objects(id = "63f7d72f4cf0331b497f3e7d").first()
+#     return room.to_json()
 
 @app.route("/room/<encoded>")
 @cross_origin()
@@ -286,7 +287,16 @@ def room_form(encoded):
     if room.verified == False:
         return room.to_json()
     return "Already verifyed", 400
-
+@app.route("/get_route", methods = ["POST"])
+@cross_origin()
+def get_route_to_room():
+    number = request.get_json()["room_n"]
+    print(number)
+    room_id = Room.objects(number = number).first().id
+    print(room_id)
+    encoded = f.encrypt(b'room_id')
+    print(encoded)
+    return encoded
 # Starting app
 if __name__=="main":
     app.run()

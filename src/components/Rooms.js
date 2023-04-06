@@ -1,8 +1,9 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { resolvePath, useNavigate } from "react-router-dom";
 import "../styles/Curator.css"
+import "../styles/Form.css"
 import { useAuth } from "../contexts/AuthContexts"
 import NavBar from './NavBar';
 const Rooms = (props) => {
@@ -12,11 +13,13 @@ const Rooms = (props) => {
   const [loading, setLoading] = useState(false)
   const [response, setResponse] = useState([])
   const [currentRoom, setCurrentRoom] = useState(null)
-
+  const [loadinRoute, setLoadingRoute] = useState([false, -1])
+  const [justcopied, setJustCopied] = useState(-1)
   let navigate = useNavigate();
   const routeChange = (path) => {
     navigate(path);
   }
+
   const verify = (e, room_number, user_id) => {
     e.preventDefault()
     let new_rooms = []
@@ -30,6 +33,20 @@ const Rooms = (props) => {
     }
     setResponse(new_rooms)
     axios.post('http://localhost:5000/verify', { room_n: room_number, u_id: user_id })
+  }
+  async function get_route(number) {
+      setLoadingRoute([true, number])
+      setJustCopied(number)
+    return new Promise(function (resolve, reject) {
+      
+    axios.post('http://localhost:5000/get_route', { room_n: number }).then((res) => {
+      console.log(res.data)
+      setLoadingRoute([false, -1])
+      resolve(res.data)
+    }).catch(err=>{
+      setLoadingRoute([false, -1])
+    })
+  })
   }
   useEffect(() => {
     setLoading(true)
@@ -47,19 +64,25 @@ const Rooms = (props) => {
       {currentRoom === null ? <>
         {loading ? <>
           <text styles={{}}><span class="loader"></span></text>
-
         </> : <>
-          <NavBar/>
+          <NavBar />
           <div className="main-text">
             <strong>Список кімнат</strong>
           </div>
           <div className="rooms">
             {response.map((ele, index) => (
-              <div className="header_button-room" onClick={() => setCurrentRoom(ele)}>{ele.number}{ele.verified ? "✔️" : "❌"}</div>
+              <div>
+                <div className='block_room'>
+                  <div className="header_button-room" onClick={() => setCurrentRoom(ele)}>{ele.number}{ele.verified ? "✔️" : "❌"}</div>
+                  <button disabled={loadinRoute[0]} className={justcopied===ele.number?'button-8-copied':'button-8'} onClick={async () => { navigator.clipboard.writeText(await get_route(ele.number)) }} >Посилання</button>
+                  {loadinRoute[0] & loadinRoute[1]===ele.number?"...":<></>}
+                </div>
+              </div>
             ))}
           </div></>}
       </> : <>
         <div className='main_form'>
+          <button className='verify_button' onClick={() => setCurrentRoom(null)}>Назад</button>
           <div className='info'><strong>Інформація про кімнату {currentRoom.number}</strong></div>
           <div className='name'>
             <strong>Ім'я мешканців:</strong>
