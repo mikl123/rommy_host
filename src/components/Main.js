@@ -1,11 +1,11 @@
 import "../styles/Main.css"
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContexts";
 import logo from './collegium.png'
-import { Container } from "react-bootstrap";
 
 import Map from "../components/Map"
 import NavBar from "./NavBar";
 function Main_Page() {
+    const { logout } = useAuth()
     return (
         <div className="main"
             style={{ minHeight: '100vh' }}>
@@ -36,9 +36,9 @@ function Main_Page() {
                 </div>
                 <div>
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-                    <a href="https://www.instagram.com/collegium.ucu/?hl=en" class="fa fa-instagram"></a>
-                    <a href="https://www.youtube.com/channel/UCL0HwqYxLxL_l35FNE24kQw" class="fa fa-youtube"></a>
-                    <a href="https://collegium.ucu.edu.ua/" class="fa fa-dribbble"></a>
+                    <a href="https://www.instagram.com/collegium.ucu/?hl=en" target="_blank" class="fa fa-instagram"></a>
+                    <a href="https://www.youtube.com/channel/UCL0HwqYxLxL_l35FNE24kQw" target="_blank" class="fa fa-youtube"></a>
+                    <a href="https://collegium.ucu.edu.ua/" target="_blank" class="fa fa-dribbble"></a>
                 </div>
                 <div className="greeting">
                     <strong><p>Вітаємо вдома!</p></strong>

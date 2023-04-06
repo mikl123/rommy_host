@@ -116,6 +116,7 @@ img {
     font-size: 150%;
     padding: 15px 10px 20px 7px;
     text-align: center;
+    background-color: #c8b8ad;
 }
 .numbers{
     color: #542400;
@@ -124,6 +125,8 @@ img {
     font-size: 150%;
     padding: 15px 10px 20px 7px;
     text-align: left;
+    background-color: #c8b8ad;
+    border-color: #542400;
 }
 .contacts{
     color: #542400;

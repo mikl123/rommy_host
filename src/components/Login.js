@@ -44,7 +44,9 @@ export default function Login() {
 
     return(
         <div>
-            <NavBar/>
+            <div className="header">
+            <div onClick={()=>navigate("/")} className="logo">RooMy</div>
+        </div>
             <div className="image">
                 {/* <img src={logo}></img> */}
             </div>
