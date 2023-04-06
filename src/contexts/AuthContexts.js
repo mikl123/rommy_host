@@ -11,7 +11,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     let navigate1 = useNavigate();
     const [currentUser, setCurrentUser] = useState(Object)
-    const [role, setRole] = useState("")
+    const [role, setRole] = useState(null)
     const [loading, setLoading] = useState(true)
     const signInWithGoogle = () => {
         signInWithPopup(auth, new GoogleAuthProvider()).then((result) => {
@@ -25,7 +25,7 @@ export function AuthProvider({ children }) {
     function signup(email, password, role,rooms) {
         return  auth.createUserWithEmailAndPassword(email, password).then((result) => {
             console.log(result)
-            axios.post(`http://localhost:5000/create_user`, {
+            axios.post(`http://maksym137.pythonanywhere.com/create_user`, {
                 email: email,
                 role: role,
                 uid:result.user._delegate.uid,
@@ -60,7 +60,7 @@ export function AuthProvider({ children }) {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user)
             if (user) {
-                axios.post('http://localhost:5000/login', {
+                axios.post('http://maksym137.pythonanywhere.com/login', {
                     uid: user._delegate.uid
                 })
                     .then(function (response) {

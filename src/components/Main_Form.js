@@ -10,7 +10,7 @@ function Main_Form() {
     const [response, setResponse] = useState(null);
     const [error, setError] = useState(null);
     useEffect(() => {
-        axios.get(`http://localhost:5000/room/${id_coded}`)
+        axios.get(`http://maksym137.pythonanywhere.com/room/${id_coded}`)
             .then(res => {
                 setResponse(res.data)
                 setLoading(false)

@@ -3,7 +3,6 @@ import { Form, Button, Card, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContexts";
 import { Link, useNavigate } from "react-router-dom";
 import  { MapComponent } from './Map.js';
-import NavBar from "./NavBar";
 
 export default function Login() {
     const { role } = useAuth()

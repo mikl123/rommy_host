@@ -39,7 +39,7 @@ const Curator_menager = () => {
     const [selected, setSelected] = useState([]);
     useEffect(() => {
         setLoading(true)
-        axios.get(`http://localhost:5000/curators`)
+        axios.get(`http://maksym137.pythonanywhere.com/curators`)
             .then(res => {
                 console.log(res.data)
                 setResponse(res.data)
