@@ -32,14 +32,14 @@ const Rooms = (props) => {
       new_rooms.push(new_room)
     }
     setResponse(new_rooms)
-    axios.post('http://maksym137.pythonanywhere.com/verify', { room_n: room_number, u_id: user_id })
+    axios.post('http://localhost:5000/verify', { room_n: room_number, u_id: user_id })
   }
   async function get_route(number) {
       setLoadingRoute([true, number])
       setJustCopied(number)
     return new Promise(function (resolve, reject) {
       
-    axios.post('http://maksym137.pythonanywhere.com/get_route', { room_n: number }).then((res) => {
+    axios.post('http://localhost:5000/get_route', { room_n: number }).then((res) => {
       console.log(res.data)
       setLoadingRoute([false, -1])
       resolve(res.data)
@@ -50,7 +50,7 @@ const Rooms = (props) => {
   }
   useEffect(() => {
     setLoading(true)
-    axios.get(`http://maksym137.pythonanywhere.com/curator_rooms/${props.user_id}`)
+    axios.get(`http://localhost:5000/curator_rooms/${props.user_id}`)
       .then(res => {
         console.log(res)
         setResponse(res.data)
