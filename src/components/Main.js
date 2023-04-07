@@ -29,7 +29,7 @@ function Main_Page() {
                 <strong>Як зареєструвати кімнату?</strong>
             </div>
             <div className="numbers">
-                <p><strong>1</strong> Скануйте QR-код на дверях.</p>
+                <p><strong>1</strong> Скануйте QR-код на дверях. Будь ласка</p>
                 <p><strong>2</strong> Запишіть всіх жителів кімнати.</p>
                 <p><strong>3</strong> Детально опишіть стан кімнати.</p>
                 <p><strong>4</strong> Натисніть зберегти.</p>
